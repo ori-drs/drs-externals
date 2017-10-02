@@ -34,3 +34,6 @@
 [submodule "estimate-pose"]
 	path = estimate-pose
 	url = https://github.com/openhumanoids/estimate-pose.git
+[submodule "maps_server"]
+	path = maps_server
+	url = https://github.com/openhumanoids/maps_server.git

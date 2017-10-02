@@ -20,7 +20,7 @@ occ-map
 
 # other
 fovis
-estimate-poses
+estimate-pose
 
 #isam
 
@@ -30,7 +30,7 @@ visualization
 pronto-lcmtypes
 vo_estimate
 ori_lcmtypes
-
+maps_server
 
 # will exclude for now
 #vicon
