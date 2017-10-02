@@ -31,3 +31,6 @@
 [submodule "vo_estimate"]
 	path = vo_estimate
 	url = https://github.com/robotperception/vo_estimate.git
+[submodule "estimate-pose"]
+	path = estimate-pose
+	url = https://github.com/openhumanoids/estimate-pose.git

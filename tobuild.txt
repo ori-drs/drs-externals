@@ -20,6 +20,8 @@ occ-map
 
 # other
 fovis
+estimate-poses
+
 #isam
 
 
