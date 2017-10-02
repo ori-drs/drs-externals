@@ -10,3 +10,9 @@
 [submodule "frsm"]
 	path = frsm
 	url = https://github.com/openhumanoids/frsm.git
+[submodule "kinematics-utils"]
+	path = kinematics-utils
+	url = https://github.com/openhumanoids/kinematics-utils.git
+[submodule "occ-map"]
+	path = occ-map
+	url = https://github.com/openhumanoids/occ-map.git
