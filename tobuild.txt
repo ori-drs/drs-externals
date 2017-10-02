@@ -20,7 +20,7 @@ occ-map
 
 # other
 fovis
-isam
+#isam
 visualization
 pronto-lcmtypes
 vo_estimate
