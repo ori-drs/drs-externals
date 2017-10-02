@@ -8,6 +8,9 @@ libbot
 # would like to use within ros:
 octomap-pod
 
+# try to do without:
+occ-map
+
 common_utils
 kinematics-utils
 
@@ -15,8 +18,7 @@ frsm
 apriltags-pod
 
 
-# try to do without:
-occ-map
+
 
 # other
 fovis
