@@ -25,3 +25,9 @@
 [submodule "octomap-pod"]
 	path = octomap-pod
 	url = https://github.com/openhumanoids/octomap-pod.git
+[submodule "fovis"]
+	path = fovis
+	url = https://github.com/openhumanoids/fovis.git
+[submodule "vo_estimate"]
+	path = vo_estimate
+	url = https://github.com/robotperception/vo_estimate.git

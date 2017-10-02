@@ -21,13 +21,16 @@ occ-map
 # other
 fovis
 #isam
+
+
+# limited to the lcmtypes used there in:
 visualization
 pronto-lcmtypes
 vo_estimate
 ori_lcmtypes
 
 
-# will exclude:
+# will exclude for now
 #vicon
 #microstrain
 
