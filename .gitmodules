@@ -1,0 +1,6 @@
+[submodule "apriltags-pod"]
+	path = apriltags-pod
+	url = https://github.com/psiorx/apriltags-pod.git
+[submodule "bot_core_lcmtypes"]
+	path = bot_core_lcmtypes
+	url = https://github.com/openhumanoids/bot_core_lcmtypes.git
