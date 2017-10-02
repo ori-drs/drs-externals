@@ -22,3 +22,6 @@
 [submodule "libbot"]
 	path = libbot
 	url = https://github.com/openhumanoids/libbot.git
+[submodule "octomap-pod"]
+	path = octomap-pod
+	url = https://github.com/openhumanoids/octomap-pod.git
