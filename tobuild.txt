@@ -12,7 +12,7 @@ common_utils
 kinematics-utils
 
 frsm
-
+apriltags-pod
 
 
 # try to do without:
