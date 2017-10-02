@@ -16,3 +16,9 @@
 [submodule "occ-map"]
 	path = occ-map
 	url = https://github.com/openhumanoids/occ-map.git
+[submodule "eigen-pod"]
+	path = eigen-pod
+	url = https://github.com/RobotLocomotion/eigen-pod.git
+[submodule "libbot"]
+	path = libbot
+	url = https://github.com/openhumanoids/libbot.git
