@@ -1,12 +1,14 @@
 [submodule "apriltags-pod"]
 	path = apriltags-pod
 	url = https://github.com/psiorx/apriltags-pod.git
+	ignore = dirty
 [submodule "bot_core_lcmtypes"]
 	path = bot_core_lcmtypes
 	url = https://github.com/openhumanoids/bot_core_lcmtypes.git
 [submodule "common_utils"]
 	path = common_utils
 	url = https://github.com/openhumanoids/common_utils.git
+	ignore = dirty
 [submodule "frsm"]
 	path = frsm
 	url = https://github.com/openhumanoids/frsm.git
