@@ -1,0 +1,35 @@
+group "0.params_and_model_pub" {
+    cmd "hyq-gazebo" {
+        exec = "roslaunch ori_leg_lab ori_hyq.launch gazebo:=true world_name:=ori.world";
+        host = "localhost";
+    }
+    cmd "param-server" {
+        exec = "bot-param-server hyq/hyq.cfg";
+        host = "localhost";
+    }
+    cmd "fusion" {
+        exec = "dls-fusion -P hyq/hyq.cfg";
+        host = "localhost";
+    }
+    cmd "hyq-director-rpg" {
+        exec = "hyq-director-rpg";
+        host = "localhost";
+    }
+    cmd "se-state-sync-simple-hyq" {
+        exec = "se-state-sync-simple-hyq";
+        host = "localhost";
+    }
+    cmd "roscore" {
+        exec = "roscore";
+        host = "localhost";
+    }
+    cmd "footstep_plan" {
+        exec = "rosrun ori_leg_lab footstep_plan";
+        host = "localhost";
+    }
+    cmd "rviz" {
+        exec = "rosrun rviz rviz";
+        host = "localhost";
+    }
+}
+

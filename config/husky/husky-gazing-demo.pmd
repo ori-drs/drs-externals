@@ -1,0 +1,99 @@
+group "0.params_and_model_pub" {
+    cmd "pserver" {
+        exec = "bot-param-server $DRC_BASE/software/config/husky/robot.cfg";
+        host = "localhost";
+    }
+    cmd "model" {
+        exec = "robot_model_publisher $DRC_BASE/software/models/husky_description/model.urdf";
+        host = "localhost";
+    }
+}
+
+group "1.vis" {
+    cmd "pronto-viewer" {
+        exec = "pronto-viewer -c husky/robot.cfg";
+        host = "localhost";
+    }
+    cmd "glview" {
+        exec = "multisense-glview";
+        host = "localhost";
+    }
+
+    cmd "director" {
+        exec = "director -husky -c $DRC_BASE/software/config/husky/robot.cfg --startup $DRC_BASE/software/ui_modules/huskydirector/runstartup.py";
+        host = "localhost";
+    }
+}
+
+group "1b.maps-server" {
+    cmd "husky-lidar-passthrough" {
+        exec = "husky-lidar-passthrough";
+        host = "localhost";
+    }
+    cmd "maps" {
+        exec = "maps-server";
+        host = "localhost";
+    }
+    cmd "data-request-server" {
+        exec = "data-request-server";
+        host = "localhost";
+    }
+}
+
+group "2.driver" {
+    cmd "ros2lcm" {
+        exec = "rosrun oh_translators ros2lcm_husky";
+        host = "cpr-ued-01";
+    }
+    cmd "lcm2ros" {
+        exec = "rosrun oh_translators lcm2ros_husky";
+        host = "cpr-ued-01";
+    }
+    cmd "multisense" {
+        exec = "multisense-lcm-driver -n hokuyo_joint -o 0";
+        host = "cpr-ued-01";
+    }
+    cmd "local-tunnel" {
+        exec = "bot-lcm-tunnel husky:1234";
+        host = "localhost";
+    }
+}
+
+group "3.gaze-follow" {
+    cmd "apriltag-app" {
+        exec = "apriltags-app -s 0.158";
+        host = "localhost";
+    }
+    cmd "husky-gaze-tracking-demo" {
+        exec = "husky-gaze-tracking-demo";
+        host = "localhost";
+    }
+    cmd "se-send-a-pose" {
+        exec = "se-send-a-pose";
+        host = "localhost";
+    }
+    cmd "state-sync" {
+        exec = "state-sync-husky";
+        host = "localhost";
+    }
+    cmd "FK" {
+        exec = "husky-joints2frames";
+        host = "localhost";
+    }
+}
+
+script "setup_localhost" {
+    start group "0.params_and_model_pub";
+    start cmd "local-tunnel";
+    start cmd "director";
+}
+
+script "setup_robot" {
+    start cmd "lcm2ros";
+    start cmd "ros2lcm";
+    start cmd "multisense";
+}
+
+script "start-demo" {
+    start group "3.gaze-follow";
+}

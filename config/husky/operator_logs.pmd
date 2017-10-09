@@ -1,0 +1,84 @@
+group "0.params_and_model_pub" {
+    cmd "pserver" {
+        exec = "bot-param-server $DRC_BASE/software/config/husky/robot.cfg";
+        host = "localhost";
+    }
+    cmd "model" {
+        exec = "robot_model_publisher $DRC_BASE/software/models/husky_description/model.urdf";
+        host = "localhost";
+    }
+}
+
+group "1.vision_navigation" {
+    cmd "rpg-scan-matcher" {
+        exec = "rpg-scan-matcher -p -l HORIZONTAL_SCAN  -F \"-2.5,2.5\" -pc POSE_BODY -P husky_sim/robot.cfg";
+        host = "localhost";
+    }
+    cmd "state-sync" {
+        exec = "state-sync-husky";
+        host = "localhost";
+    }
+    cmd "fovis-fusion" {
+        exec = "se-simple-fusion -m 3 -P husky/robot.cfg -f";
+        host = "localhost";
+    }
+}
+
+
+group "1a.vis" {
+    cmd "pronto-viewer" {
+        exec = "pronto-viewer -c husky/robot.cfg";
+        host = "localhost";
+    }
+    cmd "glview" {
+        exec = "multisense-glview";
+        host = "localhost";
+    }
+
+    cmd "director" {
+        exec = "director -husky -c $DRC_BASE/software/config/husky/robot.cfg --startup $DRC_BASE/software/ui_modules/huskydirector/runstartup.py";
+        host = "localhost";
+    }
+}
+
+group "1b.maps-server" {
+    cmd "husky-lidar-passthrough" {
+        exec = "husky-lidar-passthrough";
+        host = "localhost";
+    }
+    cmd "maps" {
+        exec = "maps-server";
+        host = "localhost";
+    }
+    cmd "data-request-server" {
+        exec = "data-request-server";
+        host = "localhost";
+    }
+}
+
+group "2.logs" {
+    cmd "library-forwards" {
+        exec = "lcm-logplayer-gui /home/gtinchev/logs/datasets/route_library/vo/route_1 --paused";
+        host = "localhost";
+    }
+    cmd "library-backwards" {
+        exec = "lcm-logplayer-gui /home/gtinchev/logs/datasets/route_library/vo/route_2 --paused";
+        host = "localhost";
+    }
+    cmd "west-forwards" {
+        exec = "lcm-logplayer-gui /home/gtinchev/logs/datasets/route_west/vo/route_1 --paused";
+        host = "localhost";
+    }
+    cmd "west-backwards" {
+        exec = "lcm-logplayer-gui /home/gtinchev/logs/datasets/route_west/vo/route_2 --paused";
+        host = "localhost";
+    }
+    cmd "gs-loop-1" {
+        exec = "lcm-logplayer-gui /home/gtinchev/logs/datasets/route_gs_long/loop_1 --paused";
+        host = "localhost";
+    }
+}
+
+script "bot_params_frames" {
+    start group "0.params_and_model_pub";
+}

@@ -1,0 +1,69 @@
+group "0.params_and_model_pub" {
+    cmd "pserver" {
+        exec = "bot-param-server $DRC_BASE/software/config/husky/robot.cfg";
+        host = "localhost";
+    }
+    cmd "model" {
+        exec = "robot_model_publisher $DRC_BASE/software/models/husky_description/model.urdf";
+        host = "localhost";
+    }
+}
+
+group "1.vision_navigation" {
+    cmd "fusion" {
+        exec = "se-simple-fusion -P husky/robot.cfg  -m 3   -p POSE_BODY -f";
+        host = "localhost";
+    }
+    cmd "registeration" {
+        exec = "dbow_batch_compare -P husky/robot.cfg -d match_database.dbow -v georges_square_snippet_1.voc   -l  -lp 4 -p /home/mfallon/logs/husky/2016-06-07-outdoor-experiment-with-MS-and-sick/database1/";
+        host = "localhost";
+    }
+    cmd "registeration_db2" {
+        exec = "dbow_batch_compare -P husky/robot.cfg -d match_database.dbow -v georges_square_snippet_1.voc   -l  -lp 4 -p /home/mfallon/logs/husky/2016-06-07-outdoor-experiment-with-MS-and-sick/database2/";
+        host = "localhost";
+    }
+}
+
+group "1b.maps-server" {
+    cmd "husky-lidar-passthrough" {
+        exec = "husky-lidar-passthrough";
+        host = "localhost";
+    }
+    cmd "maps" {
+        exec = "maps-server";
+        host = "localhost";
+    }
+    cmd "data-request-server" {
+        exec = "data-request-server";
+        host = "localhost";
+    }
+}
+
+group "2.vis" {
+    cmd "pronto-viewer" {
+        exec = "pronto-viewer -c husky/robot.cfg";
+        host = "localhost";
+    }
+    cmd "glview" {
+        exec = "multisense-glview";
+        host = "localhost";
+    }
+
+    cmd "director" {
+        exec = "director -husky -c $DRC_BASE/software/config/husky/robot.cfg --startup $DRC_BASE/software/ui_modules/huskydirector/runstartup.py";
+        host = "localhost";
+    }
+}
+
+group "3.lcmlog" {
+    cmd "lcm-log" {
+        exec = "lcm-logplayer-gui /home/mfallon/logs/husky/2016-06-07-outdoor-experiment-with-MS-and-sick/lcmlog-2016-06-07.00-camera-10fps -p";
+        host = "localhost";
+    }
+}
+
+
+cmd "access-gpu" {
+        exec = "sudo  /home/mfallon/rpg-navigation/build/bin/gpu_surf_demo --left ~/logs/husky/16-06-07-outdoor-experiment-with-MS-and-sick/database1/0001_1465297449387639_left.png  --right ~/logs/husky/2016-06-07-outdoor-experiment-with-MS-and-sick/database1/0002_1465297449487903_left.png";
+        host = "localhost";
+}

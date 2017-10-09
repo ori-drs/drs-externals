@@ -1,0 +1,101 @@
+cmd "imu-driver" {
+    exec = "microstrain --dev /dev/ttyACM0 --rate m --quat";
+    host = "hyq-green";
+}
+
+cmd "multisense-spindle" {
+    exec = "$HOME/multisense-test/build/multisense-commtest";
+    host = "hyq-vision";
+}
+
+cmd "param-server" {
+    exec = "bot-param-server $PRONTO_ROOT/config/hyq/hyq.cfg";
+    host = "hyq-vision";
+}
+
+cmd "hokuyo-driver" {
+    exec = "$HOME/git/hokuyo/build/bin/hokuyo -c HOKUYO_SCAN";
+    host = "hyq-vision";
+}
+
+cmd "multisense-driver" {
+    exec = "multisense-lcm-driver --laser-channel MULTISENSE_SCAN --imu-channel MULTISENSE_IMU --camera-channel MULTISENSE_CAMERA";
+    host = "hyq-vision";
+}
+
+cmd "lidar-odo" {
+    exec = "se-lidar-odometry -i POSE_GROUND_TRUTH -o SCAN_MATCHER";
+    host = "hyq-vision";
+}
+cmd "lidar-odo-nogt" {
+    exec = "se-lidar-odometry -g -o SCAN_MATCHER";
+    host = "hyq-vision";
+}
+
+cmd "bot-spy" {
+    exec = "bot-spy";
+    host = "localhost";
+}
+
+cmd "signal-scope" {
+    exec = "signal-scope";
+    host = "localhost";
+}
+
+cmd "dls-fusion" {
+    exec = "dls-fusion -P hyq/hyq.cfg -O state_estimator.legodo.debug=false";
+    host = "hyq-green";
+}
+
+cmd "lcm-logger" {
+    exec = "lcm-logger --channel HOKUYO_SCAN|MULTISENSE_SCAN|MULTISENSE_IMU|MULTISENSE_CAMERA|MULTISENSE_STATE|PRE_SPINDLE_TO_POST_SPINDLE|HYQ_STATE|MICROSTRAIN_INS|POSE_GROUND_TRUTH|TRANSF_GROUND_TRUTH|VICON_hyq_green";
+    host = "hyq-vision";
+}
+
+cmd "vicon-driver" {
+   exec = "vicon-client 192.168.1.15";
+   host = "hyq-vision";
+}
+
+
+script "00.start_drivers" {
+   start cmd "imu-driver";
+   wait ms 500;
+   start cmd "vicon-driver";
+   wait ms 500;
+}
+
+script "01.start_record" {
+   start cmd "hokuyo-driver";
+   wait ms 500;
+   start cmd "multisense-driver";
+   wait ms 500;
+   start cmd "multisense-spindle";
+   wait ms 500;
+   start cmd "lcm-logger";
+}
+
+script "02.stop_record" {
+   stop cmd "hokuyo-driver";
+   stop cmd "multisense-driver";
+   stop cmd "lcm-logger";
+}
+
+script "03.close_the_loop" {
+    start cmd "hokuyo-driver";
+    wait ms 100;
+    start cmd "param-server";
+    wait ms 100; 
+    start cmd "lidar-odo";
+    wait ms 100;
+}
+
+script "04.close_the_loop_nogt" {
+    start cmd "hokuyo-driver";
+    wait ms 100;
+    start cmd "param-server";
+    wait ms 100; 
+    start cmd "lidar-odo-nogt";
+    wait ms 100;    
+}
+

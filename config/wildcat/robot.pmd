@@ -1,0 +1,29 @@
+group "0.params_and_model_pub" {
+    cmd "pserver" {
+        exec = "bot-param-server $DRC_BASE/software/config/wildcat/robot.cfg";
+        host = "localhost";
+    }
+
+}
+group "1.visualization" {
+    cmd "pronto-viewer" {
+        exec = "pronto-viewer -c wildcat/robot.cfg";
+        host = "localhost";
+    }
+    cmd "director" {
+        exec = "director -husky -c $DRC_BASE/software/config/wildcat/robot.cfg --startup $DRC_BASE/software/ui_modules/huskydirector/runstartup.py";
+        host = "localhost";
+    }
+    cmd "multisense" {
+    	exec = "multisense-glview -c CAMERA";
+    	host = "localhost";
+    }
+}
+group "2.visual navigation" {
+	cmd "simple-fusion-external-vo" {
+        exec = "se-simple-fusion -P wildcat/robot.cfg -p POSE_BODY -m 3 -i STEREO_ODOMETRY -c CAMERA -imu OXTS";
+        host = "localhost";
+    }
+}
+
+

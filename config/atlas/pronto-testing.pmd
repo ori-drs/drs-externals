@@ -1,0 +1,64 @@
+group "00.params_and_model_pub" {
+    cmd "pserver" {
+        exec = "bot-param-server $DRC_BASE/software/config/atlas/robot.cfg";
+        host = "localhost";
+    }
+
+    cmd "model_LR_RR" {
+        exec = "robot_model_publisher $DRC_BASE/software/models/atlas_v5/model_LR_RR.urdf";
+        host = "localhost";
+    }
+
+}
+
+group "01.state_mit" {
+
+    cmd "joints2frames" {
+        exec = "drc-joints2frames";
+        host = "localhost";
+    }
+
+    cmd "state-sync" {
+        exec = "drc-state-sync-atlas -a5";
+        host = "localhost";
+    }
+    cmd "fusion" {
+        exec = "se-fusion -v";
+        host = "localhost";
+    }
+    cmd "yawlock" {
+        exec = "se-yawlock -yd";
+        host = "localhost";
+    }
+    cmd "contact-passthrough" {
+        exec = "drc-controller-contact-passthrough";
+        host = "localhost";
+    }
+    cmd "director-atlas" {
+        exec = "director -c $DRC_BASE/software/config/atlas/robot.cfg -v5";
+        host = "localhost";
+    }
+}
+
+
+cmd "scope-raw" {
+    exec = "signal-scope /home/mfallon/oh-distro-private/software/config/signal_scope/atlas/se_analysis_atlas.py";
+    host = "localhost";
+}
+cmd "scope-leg" {
+    exec = "signal-scope /home/mfallon/oh-distro-private/software/config/signal_scope/atlas/se_left_leg.py";
+    host = "localhost";
+}
+
+
+
+
+
+    cmd "mit-log" {
+        exec = "lcm-logplayer-gui  /home/mfallon/logs/atlas/2016-11-mit/mit-control.lcmlog -p";
+        host = "localhost";
+    }
+    cmd "bdi-log" {
+        exec = "lcm-logplayer-gui  /home/mfallon/logs/atlas/2016-11-mit/bdi-stand.lcmlog -p";
+        host = "localhost";
+    }

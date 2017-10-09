@@ -1,0 +1,61 @@
+group "0.params_and_model_pub" {
+    cmd "pserver" {
+        exec = "bot-param-server $DRC_BASE/software/config/anymal/robot.cfg";
+        host = "localhost";
+    }
+    cmd "model" {
+        exec = "robot_model_publisher $DRC_BASE/software/models/anymal_description/model.urdf";
+        host = "localhost";
+    }
+    cmd "core" {
+        exec = "roscore";
+        host = "localhost";
+    }
+}
+
+group "1.sim" {
+    cmd "gazebo" {
+        exec = "roslaunch husky_gazebo_rpg anymal_sim.launch";
+        host = "localhost";
+    }
+    cmd "ros2lcm" {
+        exec = "rosrun husky_translators ros2lcm_anymal";
+        host = "localhost";
+    }
+    cmd "lcm2ros" {
+        exec = "rosrun husky_translators lcm2ros_anymal";
+        host = "localhost";
+    }
+    cmd "se-state-sync-simple" {
+        exec = "se-state-sync-simple";
+        host = "localhost";
+    }
+}
+
+
+group "2.vis" {
+    cmd "pronto-viewer" {
+        exec = "pronto-viewer -c husky/robot.cfg";
+        host = "localhost";
+    }
+
+    cmd "director" {
+        exec = "director -anymal -c $DRC_BASE/software/config/anymal/robot.cfg --startup $DRC_BASE/software/ui_modules/huskydirector/runstartup.py";
+        host = "localhost";
+    }
+}
+
+group "3.maps-server" {
+    cmd "husky-lidar-passthrough" {
+        exec = "husky-lidar-passthrough";
+        host = "localhost";
+    }
+    cmd "maps" {
+        exec = "maps-server";
+        host = "localhost";
+    }
+    cmd "data-request-server" {
+        exec = "data-request-server";
+        host = "localhost";
+    }
+}

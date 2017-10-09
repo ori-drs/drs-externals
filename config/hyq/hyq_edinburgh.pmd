@@ -1,0 +1,88 @@
+group "0.params_and_model_pub" {
+    cmd "pserver" {
+        exec = "bot-param-server $DRC_BASE/software/config/hyq/hyq.cfg";
+        host = "localhost";
+    }
+    cmd "model" {
+        exec = "robot_model_publisher $DRC_BASE/software/models/hyq_description/robots/hyq.urdf";
+        host = "localhost";
+    }
+}
+
+group "1.vision_navigation" {
+    cmd "fusion" {
+        exec = "se-simple-fusion -p POSE_BODY";
+        host = "localhost";
+    }
+    cmd "vo" {
+        exec = "se-simple-vo -P hyq/hyq.cfg -p  -b POSE_BODY   -f -n 2 -pi  -pc POSE_GROUND_TRUTH";
+        host = "localhost";
+    }
+    cmd "se-state-sync-simple-hyq" {
+        exec = "se-state-sync-simple-hyq";
+        host = "localhost";
+    }
+}
+
+
+group "2.vis" {
+    cmd "pronto-viewer" {
+        exec = "pronto-viewer -c hyq/hyq.cfg";
+        host = "localhost";
+    }
+    cmd "glview" {
+        exec = "multisense-glview";
+        host = "localhost";
+    }
+
+    cmd "director" {
+        exec = "director -hyq -c $DRC_BASE/software/config/hyq/hyq.cfg";
+        host = "localhost";
+    }
+}
+
+group "1b.maps-server" {
+    cmd "husky-lidar-passthrough" {
+        exec = "husky-lidar-passthrough";
+        host = "localhost";
+    }
+    cmd "maps" {
+        exec = "maps-server";
+        host = "localhost";
+    }
+    cmd "data-request-server" {
+        exec = "data-request-server";
+        host = "localhost";
+    }
+}
+
+
+group "4.lcmlog" {
+    cmd "lcm-log" {
+        exec = "lcm-logplayer-gui /home/mfallon/logs/hyq/2016-06-15/trot_lasers_camera-2016-05-20.lcmlog -p";
+        host = "localhost";
+    }
+}
+
+
+
+group "5.pronto-vo" {
+    cmd "se-fusion" {
+        exec = "se-fusion -P hyq/hyq.cfg -U hyq_description/robots/hyq.urdf";
+        host = "localhost";
+    }
+
+    cmd "se-simple-vo" {
+        exec = "se-simple-vo  -p -b POSE_BODY_ALT  -pi -pc POSE_GROUND_TRUTH -n 2 -k";
+        host = "localhost";
+    }
+}
+
+
+
+script "launch_all" {
+    start group "0.params_and_model_pub";
+    start cmd "director";
+    start cmd "se-state-sync-simple-hyq";
+    start group "1b.maps-server";
+}

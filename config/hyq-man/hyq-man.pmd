@@ -1,0 +1,84 @@
+group "0.params_and_model_pub" {
+    cmd "pserver" {
+        exec = "bot-param-server $DRC_BASE/software/config/hyq-man/hyq-man.cfg";
+        host = "localhost";
+    }
+    cmd "model" {
+        exec = "robot_model_publisher $DRC_BASE/software/models/hyq_description/robots/hyq.urdf";
+        host = "localhost";
+    }
+}
+
+group "1.vision_navigation" {
+    cmd "fusion" {
+        exec = "se-simple-fusion -p POSE_BODY";
+        host = "localhost";
+    }
+    cmd "vo" {
+        exec = "se-simple-vo -P hyq-man/hyq-man.cfg -p  -b POSE_BODY   -f -n 2 -pi -m 0 -k";
+        host = "localhost";
+    }
+    cmd "se-state-sync-simple-hyq" {
+        exec = "se-state-sync-simple-hyq";
+        host = "localhost";
+    }
+    cmd "se-send-a-pose" {
+        exec = "se-send-a-pose";
+        host = "localhost";
+    }
+}
+
+
+group "2.vis" {
+    cmd "pronto-viewer" {
+        exec = "pronto-viewer -c hyq-man/hyq-man.cfg";
+        host = "localhost";
+    }
+    cmd "glview" {
+        exec = "multisense-glview";
+        host = "localhost";
+    }
+
+    cmd "director" {
+        exec = "director -hyq -c $DRC_BASE/software/config/hyq-man/hyq-man.cfg";
+        host = "localhost";
+    }
+}
+
+group "1b.maps-server" {
+    cmd "husky-lidar-passthrough" {
+        exec = "husky-lidar-passthrough";
+        host = "localhost";
+    }
+    cmd "maps" {
+        exec = "maps-server";
+        host = "localhost";
+    }
+    cmd "data-request-server" {
+        exec = "data-request-server";
+        host = "localhost";
+    }
+}
+
+
+group "4.lcmlog" {
+    cmd "log-testarea1" {
+        exec = "lcm-logplayer-gui /media/mfallon/passport_finals/iit_hyq/portable/testarea1.lcmlog -p";
+        host = "localhost";
+    }
+    cmd "log-testarea2" {
+        exec = "lcm-logplayer-gui /media/mfallon/passport_finals/iit_hyq/portable/testarea2.lcmlog -p";
+        host = "localhost";
+    }
+}
+
+
+script "launch_vo" {
+    start group "0.params_and_model_pub";
+    start cmd "director";
+    start cmd "glview";
+    start cmd "se-state-sync-simple-hyq";
+    start cmd "vo";
+    wait ms 1000;   
+    start cmd "se-send-a-pose";
+}

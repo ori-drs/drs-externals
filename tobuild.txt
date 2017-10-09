@@ -1,12 +1,11 @@
 # list of subdirectories to build, one one each line.  Empty lines
 # and lines starting with '#' are ignored
-#lcm-pod
 eigen-pod
 bot_core_lcmtypes
 libbot
 
 # would like to use within ros:
-octomap-pod
+#octomap-pod
 
 # try to do without:
 occ-map

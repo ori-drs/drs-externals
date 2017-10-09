@@ -1,0 +1,202 @@
+group "0.params" {
+    cmd "pserver" {
+        exec = "bot-param-server $DRC_BASE/software/config/husky_sim/robot.cfg";
+        host = "localhost";
+    }
+    cmd "model" {
+        exec = "robot_model_publisher $DRC_BASE/software/models/husky_description/model.urdf";
+        host = "localhost";
+    }
+    cmd "joints2frames" {
+        exec = "husky-joints2frames";
+        host = "localhost";
+    }
+}
+
+group "1.gazebo" {
+    cmd "roscore" {
+        exec = "roscore";
+        host = "localhost";
+    }
+    cmd "gazebo_flat" {
+        exec = "roslaunch husky_gazebo_rpg husky_playpen.launch";
+        host = "localhost";
+    }
+    cmd "gazebo_rolling" {
+        exec = "roslaunch husky_gazebo_rpg rolling_landscape_120m.launch";
+        host = "localhost";
+    }
+    cmd "lcm2ros" {
+        exec = "rosrun husky_translators lcm2ros_husky";
+        host = "localhost";
+    }
+    cmd "multisense-update-params" {
+        exec = "multisense-cmd-husky";
+        host = "localhost";
+    }
+}
+
+group "2.vis" {
+    cmd "pronto-viewer" {
+        exec = "pronto-viewer -c husky_sim/robot.cfg";
+        host = "localhost";
+    }
+    cmd "bot-spy" {
+        exec = "bot-spy";
+        host = "localhost";
+    }
+    cmd "rqt" {
+        exec = "rqt";
+        host = "localhost";
+    }
+    cmd "rvis" {
+        exec = "rosrun rviz rviz $DRC_BASE/software/config/husky_sim/husky_rvis.cfg.rviz";
+        host = "localhost";
+    }
+    cmd "director" {
+        exec = "director -husky -c $DRC_BASE/software/config/husky_sim/robot.cfg --startup $DRC_BASE/software/ui_modules/huskydirector/runstartup.py";
+        host = "localhost";
+    }
+}
+
+group "3a.state_est_wheels" {
+    cmd "state-sync-husky-wheels" {
+        exec = "state-sync-husky POSE_BODY_ALT";
+        host = "localhost";
+    }
+}
+
+group "3b.state_est_laser" {
+    cmd "scan-matcher" {
+        exec = "rpg-scan-matcher -p -l HORIZONTAL_SCAN  -F \"-2.5,2.5\" -d -pc POSE_BODY -P husky_sim/robot.cfg";
+        host = "localhost";
+    }
+    cmd "state-sync-husky-laser" {
+        exec = "state-sync-husky POSE_BODY";
+        host = "localhost";
+    }
+}
+
+group "3c.state_est_ground_truth" {
+    cmd "state-sync-husky-ground-truth" {
+        exec = "state-sync-husky POSE_GROUND_TRUTH";
+        host = "localhost";
+    }
+}
+
+group "3.navigation" {
+    cmd "husky-path-follower" {
+        exec = "husky-path-follower";
+        host = "localhost";
+    }   
+}
+
+
+group "4.maps-server" {
+    cmd "husky-lidar-passthrough" {
+        exec = "husky-lidar-passthrough -s -a 0.7";
+        host = "localhost";
+    }
+    cmd "maps" {
+        exec = "maps-server";
+        host = "localhost";
+    }
+    cmd "data-request-server" {
+        exec = "data-request-server";
+        host = "localhost";
+    }
+}
+
+group "5.april-tags" {
+    cmd "ros2lcm-camera" {
+        exec = "roslaunch husky_translators camera_bridge.launch";
+        host = "localhost";
+    }
+    cmd "apriltags-app" {
+        exec = "apriltags-app";
+        host = "localhost";
+    }
+    cmd "gaze-tracking" {
+        exec = "husky-gaze-tracking-demo";
+        host = "localhost";
+    }
+}
+
+
+
+group "8.moos-core" {
+    cmd "MOODB" {
+        exec = "MOOSDB";
+        host = "localhost";
+    }
+    cmd "mtm" {
+        exec = "mtm";
+        host = "localhost";
+    }
+    cmd "mrg_viewer" {
+        exec = "mrg_viewer";
+        host = "localhost";
+    }
+    cmd "multisense-glview" {
+        exec = "multisense-glview";
+        host = "localhost";
+    }
+}
+
+group "9.moos-process" {
+    cmd "LcmToMoos" {
+        exec = "mlcm-to-moos";
+        host = "localhost";
+    }    
+    cmd "mlcm-mrg-viewer-rotate" {
+        exec = "mlcm-mrg-viewer-rotate";
+        host = "localhost";
+    }    
+    cmd "mlcm-live-visualiser" {
+        exec = "mlcm-live-visualiser";
+        host = "localhost";
+    }
+    cmd "LcmToMoosAlt" {
+        exec = "LD_PRELOAD=\"/usr/lib/x86_64-linux-gnu/libpcre.so\" mlcm-to-moos";
+        host = "localhost";
+    }    
+}
+
+
+script "a_gazebo_flat" {
+    start group "0.params";
+    start cmd "director";
+    start cmd "roscore";
+    start cmd "lcm2ros";
+    wait ms 1000;
+    start cmd "gazebo_flat";
+    start cmd "multisense-update-params";
+}
+
+script "a_gazebo_rolling" {
+    start group "0.params";
+    start cmd "director";
+    start cmd "roscore";
+    start cmd "lcm2ros";    
+    wait ms 1000;
+    start cmd "gazebo_rolling";
+    start cmd "multisense-update-params";
+}
+
+script "b_state_est_wheels" {
+    start group "3a.state_est_wheels";
+}
+
+script "b_state_est_laser" {
+    start group "3b.state_est_laser";
+}
+
+script "c_path_follower" {
+    start cmd "husky-path-follower";    
+}
+
+script "z_start_flat_wheels_fol" {
+    run_script "a_gazebo_flat";
+    run_script "b_state_est_wheels";
+    start cmd "husky-path-follower";    
+}
