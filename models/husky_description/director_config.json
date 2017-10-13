@@ -1,0 +1,59 @@
+{
+  "modelName" : "husky",
+  "urdfConfig": {
+    "default": "./model.urdf",
+    "robotState": "./model.urdf",
+    "ik":         "./model.urdf",
+    "chull":      "./model.urdf",
+    "playback":   "./model.urdf",
+    "teleop":     "./model.urdf"
+  },
+
+  "teleopJointGroups" : [
+      { "name" : "Base",
+        "joints" : [
+          "base_x",
+          "base_y",
+          "base_z",
+          "base_roll",
+          "base_pitch",
+          "base_yaw"
+          ],
+        "labels" : ["x", "y", "z", "roll", "pitch", "yaw"]
+      },
+
+      { "name" : "Left Arm",
+        "joints" : [
+          ],
+        "labels" : []
+      }
+
+    ],
+
+  "drakeJointNames": [
+    "base_x",
+    "base_y",
+    "base_z",
+    "base_roll",
+    "base_pitch",
+    "base_yaw",
+    "ptu_pan",
+    "ptu_tilt",
+    "hokuyo_joint"
+  ],
+  "robotStateJointNames": [
+    "ptu_pan",
+    "ptu_tilt",
+    "hokuyo_joint"
+  ],
+  "fixedPointFile" : "husky_fp.mat",
+  "postureDatabaseFile" : "./stored_poses.json",
+  "headLink" : "head",
+
+
+  "handCombinations": [
+  ],
+
+  "userConfig" : [],
+  "disableComponents" : ["usePlanning","useHumanoidDRCDemos","useConvexHullModel","useIk", "useAtlasDriver", "useFootsteps", "useControllerRate", "useCOPMonitor", "useCOMMonitor"]
+}

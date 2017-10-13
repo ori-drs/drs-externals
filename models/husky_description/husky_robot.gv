@@ -1,0 +1,104 @@
+digraph G {
+node [shape=box];
+"base_link" [label="base_link"];
+"base_footprint" [label="base_footprint"];
+"top_plate_link" [label="top_plate_link"];
+"front_hokuyo_frame" [label="front_hokuyo_frame"];
+"sick_laser" [label="sick_laser"];
+"300Arch" [label="300Arch"];
+"ptu_base_link" [label="ptu_base_link"];
+"ptu_pan_link" [label="ptu_pan_link"];
+"ptu_tilt_link" [label="ptu_tilt_link"];
+"ptu_mount_link" [label="ptu_mount_link"];
+"head_root" [label="head_root"];
+"head" [label="head"];
+"center_bottom_led_frame" [label="center_bottom_led_frame"];
+"center_top_led_frame" [label="center_top_led_frame"];
+"head_imu_link" [label="head_imu_link"];
+"hokuyo_link" [label="hokuyo_link"];
+"head_hokuyo_frame" [label="head_hokuyo_frame"];
+"left_camera_frame" [label="left_camera_frame"];
+"left_camera_optical_frame" [label="left_camera_optical_frame"];
+"left_led_frame" [label="left_led_frame"];
+"right_camera_frame" [label="right_camera_frame"];
+"right_camera_optical_frame" [label="right_camera_optical_frame"];
+"right_led_frame" [label="right_led_frame"];
+"front_bumper_link" [label="front_bumper_link"];
+"front_left_wheel_link" [label="front_left_wheel_link"];
+"front_right_wheel_link" [label="front_right_wheel_link"];
+"imu_link" [label="imu_link"];
+"inertial_link" [label="inertial_link"];
+"pelvis" [label="pelvis"];
+"rear_bumper_link" [label="rear_bumper_link"];
+"rear_left_wheel_link" [label="rear_left_wheel_link"];
+"rear_right_wheel_link" [label="rear_right_wheel_link"];
+"top_chassis_link" [label="top_chassis_link"];
+"user_rail_link" [label="user_rail_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_link" -> "base_footprint_joint" [label="xyz: 0 0 -0.14493 \nrpy: 0 -0 0"]
+"base_footprint_joint" -> "base_footprint"
+"base_link" -> "base_link_to_topPlate" [label="xyz: 0.02 0 0.2503 \nrpy: 0 -0 0"]
+"base_link_to_topPlate" -> "top_plate_link"
+"top_plate_link" -> "front_hokuyo_joint" [label="xyz: 0.33 0 0.065 \nrpy: 0 -0 0"]
+"front_hokuyo_joint" -> "front_hokuyo_frame"
+"top_plate_link" -> "sick_laser_joint" [label="xyz: -0.115 0 0.095 \nrpy: 0 -1.5708 3.14159"]
+"sick_laser_joint" -> "sick_laser"
+"top_plate_link" -> "top_plate_to_300Arch" [label="xyz: -0.28 0 0.15 \nrpy: 0 -0 3.14159"]
+"top_plate_to_300Arch" -> "300Arch"
+"base_link" -> "base_to_ptu_base" [label="xyz: 0.24 0 0.25 \nrpy: 0 -0 0"]
+"base_to_ptu_base" -> "ptu_base_link"
+"ptu_base_link" -> "ptu_pan" [label="xyz: 0 0 0.092 \nrpy: 0 -0 0"]
+"ptu_pan" -> "ptu_pan_link"
+"ptu_pan_link" -> "ptu_tilt" [label="xyz: 0 0 0.13 \nrpy: 0 -0 0"]
+"ptu_tilt" -> "ptu_tilt_link"
+"ptu_tilt_link" -> "ptu_mount" [label="xyz: 0 0 0.046 \nrpy: 0 -0 0"]
+"ptu_mount" -> "ptu_mount_link"
+"ptu_mount_link" -> "multisense_to_ptu" [label="xyz: 0.075 0 0.075 \nrpy: 0 -0 0"]
+"multisense_to_ptu" -> "head_root"
+"head_root" -> "head_root_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"head_root_joint" -> "head"
+"head" -> "center_bottom_led_frame_joint" [label="xyz: 0.01125 0 -0.0155 \nrpy: 0 -0 0"]
+"center_bottom_led_frame_joint" -> "center_bottom_led_frame"
+"head" -> "center_top_led_frame_joint" [label="xyz: 0.01125 0 0.0105 \nrpy: 0 -0 0"]
+"center_top_led_frame_joint" -> "center_top_led_frame"
+"head" -> "head_imu_joint" [label="xyz: -0.0475 0.035 0 \nrpy: 0 -0 0"]
+"head_imu_joint" -> "head_imu_link"
+"head" -> "hokuyo_joint" [label="xyz: -0.0446 0 0.088 \nrpy: 0 -0 0"]
+"hokuyo_joint" -> "hokuyo_link"
+"hokuyo_link" -> "head_hokuyo_joint" [label="xyz: 0.03 0 0.015 \nrpy: 0 -0 0"]
+"head_hokuyo_joint" -> "head_hokuyo_frame"
+"head" -> "left_camera_frame_joint" [label="xyz: 0 0.035 -0.002 \nrpy: 0 -0 0"]
+"left_camera_frame_joint" -> "left_camera_frame"
+"left_camera_frame" -> "left_camera_optical_frame_joint" [label="xyz: 0 0 0 \nrpy: -1.5708 -0 -1.5708"]
+"left_camera_optical_frame_joint" -> "left_camera_optical_frame"
+"head" -> "left_led_frame_joint" [label="xyz: -0.01443 0.07452 0.050346 \nrpy: 0 -0.15 0.53"]
+"left_led_frame_joint" -> "left_led_frame"
+"head" -> "right_camera_frame_joint" [label="xyz: 0 -0.035 -0.002 \nrpy: 0 -0 0"]
+"right_camera_frame_joint" -> "right_camera_frame"
+"right_camera_frame" -> "right_camera_optical_frame_joint" [label="xyz: 0 0 0 \nrpy: -1.5708 -0 -1.5708"]
+"right_camera_optical_frame_joint" -> "right_camera_optical_frame"
+"head" -> "right_led_frame_joint" [label="xyz: -0.01443 -0.07452 0.050346 \nrpy: 0 -0.15 -0.53"]
+"right_led_frame_joint" -> "right_led_frame"
+"base_link" -> "front_bumper" [label="xyz: 0.48 0 0.091 \nrpy: 0 -0 0"]
+"front_bumper" -> "front_bumper_link"
+"base_link" -> "front_left_wheel" [label="xyz: 0.256 0.2854 0.03282 \nrpy: 0 -0 0"]
+"front_left_wheel" -> "front_left_wheel_link"
+"base_link" -> "front_right_wheel" [label="xyz: 0.256 -0.2854 0.03282 \nrpy: 0 -0 0"]
+"front_right_wheel" -> "front_right_wheel_link"
+"base_link" -> "imu_joint" [label="xyz: 0.19 0 0.149 \nrpy: -3.14159 -1.57079 7.34641e-06"]
+"imu_joint" -> "imu_link"
+"base_link" -> "inertial_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"inertial_joint" -> "inertial_link"
+"base_link" -> "pelvis_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"pelvis_joint" -> "pelvis"
+"base_link" -> "rear_bumper" [label="xyz: -0.48 0 0.091 \nrpy: 0 -0 3.14159"]
+"rear_bumper" -> "rear_bumper_link"
+"base_link" -> "rear_left_wheel" [label="xyz: -0.256 0.2854 0.03282 \nrpy: 0 -0 0"]
+"rear_left_wheel" -> "rear_left_wheel_link"
+"base_link" -> "rear_right_wheel" [label="xyz: -0.256 -0.2854 0.03282 \nrpy: 0 -0 0"]
+"rear_right_wheel" -> "rear_right_wheel_link"
+"base_link" -> "top_chassis_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"top_chassis_joint" -> "top_chassis_link"
+"base_link" -> "user_rail" [label="xyz: 0.272 0 0.245 \nrpy: 0 -0 0"]
+"user_rail" -> "user_rail_link"
+}

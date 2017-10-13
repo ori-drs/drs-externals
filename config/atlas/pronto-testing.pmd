@@ -1,11 +1,11 @@
 group "00.params_and_model_pub" {
     cmd "pserver" {
-        exec = "bot-param-server $DRC_BASE/software/config/atlas/robot.cfg";
+        exec = "bot-param-server $RPG_BASE/code_externals/config/atlas/robot.cfg";
         host = "localhost";
     }
 
     cmd "model_LR_RR" {
-        exec = "robot_model_publisher $DRC_BASE/software/models/atlas_v5/model_LR_RR.urdf";
+        exec = "rosrun model_client robot_model_publisher $RPG_BASE/code_externals/models/atlas_v5/model_LR_RR.urdf";
         host = "localhost";
     }
 
@@ -14,7 +14,7 @@ group "00.params_and_model_pub" {
 group "01.state_mit" {
 
     cmd "joints2frames" {
-        exec = "drc-joints2frames";
+        exec = "rosrun rpg_control joints2frames";
         host = "localhost";
     }
 
@@ -22,8 +22,12 @@ group "01.state_mit" {
         exec = "drc-state-sync-atlas -a5";
         host = "localhost";
     }
+    cmd "state-sync-simple" {
+        exec = "rosrun  motion_estimate state-sync-simple.py";
+        host = "localhost";
+    }
     cmd "fusion" {
-        exec = "se-fusion -v";
+        exec = "rosrun motion_estimate se-fusion -v";
         host = "localhost";
     }
     cmd "yawlock" {
@@ -62,3 +66,10 @@ cmd "scope-leg" {
         exec = "lcm-logplayer-gui  /home/mfallon/logs/atlas/2016-11-mit/bdi-stand.lcmlog -p";
         host = "localhost";
     }
+
+
+cmd "pronto_viewer" {
+    exec = "rosrun pronto_viewer pronto_viewer";
+    host = "localhost";
+}
+

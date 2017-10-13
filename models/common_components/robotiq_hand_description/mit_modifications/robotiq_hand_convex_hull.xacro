@@ -1,0 +1,34 @@
+<robot name="robotiq" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="robotiq_convex_hull" params="side is_open use_visuals parent">
+    <link name="${side}_palm">
+      <xacro:if value="${use_visuals}">
+        <visual>
+          <origin rpy="-1.57079 -1.57079 0" xyz="0 0.1725 0"/>
+          <geometry>
+            <xacro:if value="${is_open}">
+              <mesh filename="package://robotiq_hand_description/meshes/s-model/visual/GRIPPER_OPEN.obj" scale="1 1 1"/>
+            </xacro:if>
+            <xacro:unless value="${is_open}">
+              <mesh filename="package://robotiq_hand_description/meshes/s-model/visual/GRIPPER_CLOSED.obj" scale="1 1 1"/>
+            </xacro:unless>
+          </geometry>
+        </visual>
+      </xacro:if>
+      <collision group="${side}_hand_robotiq">
+        <origin rpy="-1.57079 -1.57079 0" xyz="0 0.1725 0"/>
+        <geometry>
+          <xacro:if value="${is_open}">
+            <mesh filename="package://robotiq_hand_description/meshes/s-model/collision/GRIPPER_OPEN_chull.obj" scale="1 1 1"/>
+          </xacro:if>
+          <xacro:unless value="${is_open}">
+            <mesh filename="package://robotiq_hand_description/meshes/s-model/collision/GRIPPER_CLOSED.obj" scale="1 1 1"/>
+          </xacro:unless>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${side}_palm_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${side}_palm"/>
+    </joint>
+  </xacro:macro>
+</robot>

@@ -1,0 +1,9 @@
+<package>
+  <name>robotiq_hand_description</name>
+  <version>0.0.1</version>
+  <maintainer email="tbd@tbd.tbd">tbd</maintainer>
+  <description>robotiq_hand_description</description>
+  <license>tbd</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>
