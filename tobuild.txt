@@ -11,7 +11,7 @@ libbot
 occ-map
 
 common_utils
-kinematics-utils
+#kinematics-utils
 
 frsm
 apriltags-pod
