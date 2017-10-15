@@ -18,24 +18,16 @@ group "01.state_mit" {
         host = "localhost";
     }
 
-    cmd "state-sync" {
-        exec = "drc-state-sync-atlas -a5";
-        host = "localhost";
-    }
     cmd "state-sync-simple" {
         exec = "rosrun  motion_estimate state-sync-simple.py";
         host = "localhost";
     }
     cmd "fusion" {
-        exec = "rosrun motion_estimate se-fusion -v";
+        exec = "rosrun motion_estimate se-fusion";
         host = "localhost";
     }
     cmd "yawlock" {
-        exec = "se-yawlock -yd";
-        host = "localhost";
-    }
-    cmd "contact-passthrough" {
-        exec = "drc-controller-contact-passthrough";
+        exec = "rosrun motion_estimate se-yawlock -yd";
         host = "localhost";
     }
     cmd "director-atlas" {
@@ -44,6 +36,25 @@ group "01.state_mit" {
     }
 }
 
+
+group "02.logs" {
+    cmd "log-mit" {
+        exec = "lcm-logplayer-gui  /home/mfallon/logs/atlas/2016-11-mit/mit-control.lcmlog -p";
+        host = "localhost";
+    }
+    cmd "log-bdi" {
+        exec = "lcm-logplayer-gui  /home/mfallon/logs/atlas/2016-11-mit/bdi-stand.lcmlog -p";
+        host = "localhost";
+    }
+    cmd "log-walking-backwards" {
+        exec = "lcm-logplayer-gui  /home/mfallon/logs/pronto_test_logs/atlas/20160315-walking-backwards.lcmlog -p";
+        host = "localhost";
+    }
+    cmd "log-pick-from-floor" {
+        exec = "lcm-logplayer-gui  /home/mfallon/logs/pronto_test_logs/atlas/20160315-pick-from-floor.lcmlog -p";
+        host = "localhost";
+    }
+}
 
 cmd "scope-raw" {
     exec = "signal-scope /home/mfallon/oh-distro-private/software/config/signal_scope/atlas/se_analysis_atlas.py";
@@ -57,15 +68,6 @@ cmd "scope-leg" {
 
 
 
-
-    cmd "mit-log" {
-        exec = "lcm-logplayer-gui  /home/mfallon/logs/atlas/2016-11-mit/mit-control.lcmlog -p";
-        host = "localhost";
-    }
-    cmd "bdi-log" {
-        exec = "lcm-logplayer-gui  /home/mfallon/logs/atlas/2016-11-mit/bdi-stand.lcmlog -p";
-        host = "localhost";
-    }
 
 
 cmd "pronto_viewer" {
