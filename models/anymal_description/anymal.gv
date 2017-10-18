@@ -1,0 +1,101 @@
+digraph G {
+node [shape=box];
+"base" [label="base"];
+"LF_HIP" [label="LF_HIP"];
+"LF_THIGH" [label="LF_THIGH"];
+"LF_SHANK" [label="LF_SHANK"];
+"LF_FOOT_MOUNT" [label="LF_FOOT_MOUNT"];
+"LF_FOOT_SENSOR" [label="LF_FOOT_SENSOR"];
+"LF_FOOT" [label="LF_FOOT"];
+"LH_HIP" [label="LH_HIP"];
+"LH_THIGH" [label="LH_THIGH"];
+"LH_SHANK" [label="LH_SHANK"];
+"LH_FOOT_MOUNT" [label="LH_FOOT_MOUNT"];
+"LH_FOOT_SENSOR" [label="LH_FOOT_SENSOR"];
+"LH_FOOT" [label="LH_FOOT"];
+"RF_HIP" [label="RF_HIP"];
+"RF_THIGH" [label="RF_THIGH"];
+"RF_SHANK" [label="RF_SHANK"];
+"RF_FOOT_MOUNT" [label="RF_FOOT_MOUNT"];
+"RF_FOOT_SENSOR" [label="RF_FOOT_SENSOR"];
+"RF_FOOT" [label="RF_FOOT"];
+"RH_HIP" [label="RH_HIP"];
+"RH_THIGH" [label="RH_THIGH"];
+"RH_SHANK" [label="RH_SHANK"];
+"RH_FOOT_MOUNT" [label="RH_FOOT_MOUNT"];
+"RH_FOOT_SENSOR" [label="RH_FOOT_SENSOR"];
+"RH_FOOT" [label="RH_FOOT"];
+"actuated_lidar_front_dynamixel_axis_aligned" [label="actuated_lidar_front_dynamixel_axis_aligned"];
+"actuated_lidar_front_dynamixel" [label="actuated_lidar_front_dynamixel"];
+"actuated_lidar_front_dynamixel_servo" [label="actuated_lidar_front_dynamixel_servo"];
+"actuated_lidar_front_hokuyo_axis_aligned" [label="actuated_lidar_front_hokuyo_axis_aligned"];
+"actuated_lidar_front_hokuyo" [label="actuated_lidar_front_hokuyo"];
+"actuated_lidar_front_mass" [label="actuated_lidar_front_mass"];
+"base_inertia" [label="base_inertia"];
+"imu_link" [label="imu_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base" -> "LF_HAA" [label="xyz: 0.2629 0.115 0 \nrpy: 0 -0 0"]
+"LF_HAA" -> "LF_HIP"
+"LF_HIP" -> "LF_HFE" [label="xyz: 0.0585 0.0315 0 \nrpy: 0 -0 0"]
+"LF_HFE" -> "LF_THIGH"
+"LF_THIGH" -> "LF_KFE" [label="xyz: 0 0.111 -0.25 \nrpy: 0 -0 0"]
+"LF_KFE" -> "LF_SHANK"
+"LF_SHANK" -> "LF_ANKLE_JOINT" [label="xyz: 0 -0.016 -0.31 \nrpy: 0.323 0.549 1.62685e-17"]
+"LF_ANKLE_JOINT" -> "LF_FOOT_MOUNT"
+"LF_FOOT_MOUNT" -> "LF_MOUNT_TO_SENSOR" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"LF_MOUNT_TO_SENSOR" -> "LF_FOOT_SENSOR"
+"LF_FOOT_SENSOR" -> "LF_SENSOR_TO_FOOT" [label="xyz: 0 0 -0.0385 \nrpy: 0 -0 0"]
+"LF_SENSOR_TO_FOOT" -> "LF_FOOT"
+"base" -> "LH_HAA" [label="xyz: -0.2629 0.115 0 \nrpy: 0 -0 0"]
+"LH_HAA" -> "LH_HIP"
+"LH_HIP" -> "LH_HFE" [label="xyz: -0.0585 0.0315 0 \nrpy: 0 -0 0"]
+"LH_HFE" -> "LH_THIGH"
+"LH_THIGH" -> "LH_KFE" [label="xyz: -0 0.111 -0.25 \nrpy: 0 -0 0"]
+"LH_KFE" -> "LH_SHANK"
+"LH_SHANK" -> "LH_ANKLE_JOINT" [label="xyz: -0 -0.016 -0.31 \nrpy: 0.323 -0.549 -1.62685e-17"]
+"LH_ANKLE_JOINT" -> "LH_FOOT_MOUNT"
+"LH_FOOT_MOUNT" -> "LH_MOUNT_TO_SENSOR" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"LH_MOUNT_TO_SENSOR" -> "LH_FOOT_SENSOR"
+"LH_FOOT_SENSOR" -> "LH_SENSOR_TO_FOOT" [label="xyz: 0 0 -0.0385 \nrpy: 0 -0 0"]
+"LH_SENSOR_TO_FOOT" -> "LH_FOOT"
+"base" -> "RF_HAA" [label="xyz: 0.2629 -0.115 0 \nrpy: 0 -0 0"]
+"RF_HAA" -> "RF_HIP"
+"RF_HIP" -> "RF_HFE" [label="xyz: 0.0585 -0.0315 0 \nrpy: 0 -0 0"]
+"RF_HFE" -> "RF_THIGH"
+"RF_THIGH" -> "RF_KFE" [label="xyz: 0 -0.111 -0.25 \nrpy: 0 -0 0"]
+"RF_KFE" -> "RF_SHANK"
+"RF_SHANK" -> "RF_ANKLE_JOINT" [label="xyz: 0 0.016 -0.31 \nrpy: -0.323 0.549 -1.62685e-17"]
+"RF_ANKLE_JOINT" -> "RF_FOOT_MOUNT"
+"RF_FOOT_MOUNT" -> "RF_MOUNT_TO_SENSOR" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"RF_MOUNT_TO_SENSOR" -> "RF_FOOT_SENSOR"
+"RF_FOOT_SENSOR" -> "RF_SENSOR_TO_FOOT" [label="xyz: 0 0 -0.0385 \nrpy: 0 -0 0"]
+"RF_SENSOR_TO_FOOT" -> "RF_FOOT"
+"base" -> "RH_HAA" [label="xyz: -0.2629 -0.115 0 \nrpy: 0 -0 0"]
+"RH_HAA" -> "RH_HIP"
+"RH_HIP" -> "RH_HFE" [label="xyz: -0.0585 -0.0315 0 \nrpy: 0 -0 0"]
+"RH_HFE" -> "RH_THIGH"
+"RH_THIGH" -> "RH_KFE" [label="xyz: -0 -0.111 -0.25 \nrpy: 0 -0 0"]
+"RH_KFE" -> "RH_SHANK"
+"RH_SHANK" -> "RH_ANKLE_JOINT" [label="xyz: -0 0.016 -0.31 \nrpy: -0.323 -0.549 1.62685e-17"]
+"RH_ANKLE_JOINT" -> "RH_FOOT_MOUNT"
+"RH_FOOT_MOUNT" -> "RH_MOUNT_TO_SENSOR" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"RH_MOUNT_TO_SENSOR" -> "RH_FOOT_SENSOR"
+"RH_FOOT_SENSOR" -> "RH_SENSOR_TO_FOOT" [label="xyz: 0 0 -0.0385 \nrpy: 0 -0 0"]
+"RH_SENSOR_TO_FOOT" -> "RH_FOOT"
+"base" -> "base_to_actuated_lidar_front_dynamixel_axis_aligned" [label="xyz: 0.2 0 0.1415 \nrpy: 1.5708 -5.55112e-17 1.5708"]
+"base_to_actuated_lidar_front_dynamixel_axis_aligned" -> "actuated_lidar_front_dynamixel_axis_aligned"
+"actuated_lidar_front_dynamixel_axis_aligned" -> "actuated_lidar_front_dynamixel_axis_aligned_to_dynamixel" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"actuated_lidar_front_dynamixel_axis_aligned_to_dynamixel" -> "actuated_lidar_front_dynamixel"
+"actuated_lidar_front_dynamixel" -> "actuated_lidar_front_dynamixel" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"actuated_lidar_front_dynamixel" -> "actuated_lidar_front_dynamixel_servo"
+"actuated_lidar_front_dynamixel_servo" -> "actuated_lidar_front_dynamixel_servo_to_hokuyo_axis_aligned" [label="xyz: 0 0 0.1515 \nrpy: 0 -1.5708 -1.5708"]
+"actuated_lidar_front_dynamixel_servo_to_hokuyo_axis_aligned" -> "actuated_lidar_front_hokuyo_axis_aligned"
+"actuated_lidar_front_hokuyo_axis_aligned" -> "actuated_lidar_front_hokuyo_axis_aligned_to_hokuyo" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"actuated_lidar_front_hokuyo_axis_aligned_to_hokuyo" -> "actuated_lidar_front_hokuyo"
+"base" -> "base_to_actuated_lidar_front_mass" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"base_to_actuated_lidar_front_mass" -> "actuated_lidar_front_mass"
+"base" -> "base_to_base_inertia" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"base_to_base_inertia" -> "base_inertia"
+"base" -> "imu_joint" [label="xyz: 0.0245 -0.04255 0.1857 \nrpy: -3.14159 -0 0"]
+"imu_joint" -> "imu_link"
+}
