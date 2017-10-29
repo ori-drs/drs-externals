@@ -1,0 +1,20 @@
+package drc;
+
+struct block_fit_request_t
+{
+  // request timestamp
+  int64_t utime;
+
+  // prior dimensions (set to all zeros to return all blocks)
+  float dimensions[3];
+
+  // affordance prefix
+  string name_prefix;
+
+  // algorithm
+  int8_t algorithm;
+
+  const int8_t MIN_AREA = 0;
+  const int8_t CLOSEST_SIZE = 1;
+  const int8_t MAX_OVERLAP = 2;
+}
