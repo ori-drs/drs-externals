@@ -1,0 +1,51 @@
+package drc;
+
+struct walking_plan_t
+{
+	int64_t utime;
+	string robot_name;
+
+	int32_t n_xtraj_bytes;
+  byte xtraj[n_xtraj_bytes];
+
+	int32_t n_support_times;
+  float support_times[n_support_times];
+
+	int32_t n_supports_bytes;
+  byte supports[n_supports_bytes];
+
+	int32_t n_S_bytes;
+  byte S[n_S_bytes];
+
+  int32_t n_s1_bytes;
+  byte s1[n_s1_bytes];
+
+  int32_t n_s2_bytes;
+  byte s2[n_s2_bytes];
+
+  int32_t n_s1dot_bytes;
+  byte s1dot[n_s1dot_bytes];
+
+  int32_t n_s2dot_bytes;
+  byte s2dot[n_s2dot_bytes];
+
+	int32_t n_comtraj_bytes;
+  byte comtraj[n_comtraj_bytes];
+
+	int32_t n_zmptraj_bytes;
+  byte zmptraj[n_zmptraj_bytes];
+
+  double D_ls[2][2];
+
+  int32_t n_link_constraints_bytes;
+  byte link_constraints[n_link_constraints_bytes];
+
+  float mu; // friction coef
+
+  float t_offset;
+
+  boolean ignore_terrain;
+
+  string gain_set;
+}
+

@@ -67,6 +67,15 @@ const double PARAM_POSE_WIDTH_POSES_MAX = 30;
 const double PARAM_POSE_WIDTH_POSES_DELTA = 0.1;
 const double PARAM_POSE_WIDTH_POSES_DEFAULT = 1;
 
+const char* PARAM_NORMAL_WIDTH_NORMAL = "Normal length";
+const double PARAM_NORMAL_WIDTH_NORMAL_MIN = 0.0;
+const double PARAM_NORMAL_WIDTH_NORMAL_MAX = 5;
+const double PARAM_NORMAL_WIDTH_NORMAL_DELTA = 0.05;
+const double PARAM_NORMAL_WIDTH_NORMAL_DEFAULT = 1;
+
+const char* PARAM_COLOR_AXES = "Color Poses";
+const bool PARAM_COLOR_AXES_DEFAULT = false;
+
 const char* PARAM_COLOR_TIME = "Color by time";
 const bool PARAM_COLOR_TIME_DEFAULT = false;
 
@@ -93,6 +102,7 @@ const double PARAM_RANGE_END_DEFAULT = 1.;
 
 const char* PARAM_Z_UP = "Z-axis up";
 const bool PARAM_Z_UP_DEFAULT = true;
+
 float colors[] = {
     51/255.0, 160/255.0, 44/255.0,
     166/255.0, 206/255.0, 227/255.0,
@@ -209,8 +219,11 @@ struct _RendererCollections {
   double param_alpha_points;
   double param_point_width;
   double param_pose_width;
+  double param_normal_width;
   bool param_color_time;
   bool param_z_up;
+
+  bool param_color_axes;
   
   bool toggle_onoff;
 
@@ -337,7 +350,7 @@ static void draw_tree(RendererCollections *self, double x, double y, double z) {
   glPopMatrix();
 }
 
-static void draw_axis(RendererCollections *self, double x, double y, double z, double yaw, double pitch, double roll, double size, bool mark) 
+static void draw_axis(RendererCollections *self, double x, double y, double z, double yaw, double pitch, double roll, double size, bool mark, int id) 
 {
   glPushMatrix();
   glPushAttrib(GL_CURRENT_BIT);
@@ -349,9 +362,22 @@ static void draw_axis(RendererCollections *self, double x, double y, double z, d
   glRotatef(bot_to_degrees(roll), 1., 0., 0.);
 
   glBegin(GL_LINES);
+
+  if (self->param_color_axes){
+    GLfloat color[3];
+    color[0] = colors[3*(id%num_colors)];
+    color[1] = colors[3*(id%num_colors)+1];
+    color[2] = colors[3*(id%num_colors)+2];
+
+    glColor3f(color[0],color[1],color[2]); glVertex3f(0.0,0.0,0.0); glVertex3f(size*1.0,0.0,0.0);
+    glColor3f(color[0],color[1],color[2]); glVertex3f(0.0,0.0,0.0); glVertex3f(0.0,size*1.0,0.0);
+    glColor3f(color[0],color[1],color[2]); glVertex3f(0.0,0.0,0.0); glVertex3f(0.0,0.0,size*1.0);
+  }else{
     glColor3f(1.0,0.0,0.0); glVertex3f(0.0,0.0,0.0); glVertex3f(size*1.0,0.0,0.0);
     glColor3f(0.0,1.0,0.0); glVertex3f(0.0,0.0,0.0); glVertex3f(0.0,size*1.0,0.0);
     glColor3f(0.0,0.0,1.0); glVertex3f(0.0,0.0,0.0); glVertex3f(0.0,0.0,size*1.0);
+  }
+
   glEnd();
 
   if (mark) {
@@ -611,6 +637,44 @@ static void draw_tetra(RendererCollections *self, double x, double y, double z, 
   glPopMatrix();
 }
 
+
+static void draw_arrow(RendererCollections *self, double x, double y, double z, 
+  double yaw, double pitch, double roll, double r, double g, double b) {
+  // based off of draw_camera
+  if (!self->viewer) return;
+
+  glPushMatrix();
+  glTranslatef(x, y, z);
+  glColor3f(r,g,b);
+  //glColor3f(0.1,0.7,0.1);
+  glRotatef(bot_to_degrees(yaw),  0., 0., 1.);
+  glRotatef(bot_to_degrees(pitch),0., 1., 0.);
+  glRotatef(bot_to_degrees(roll), 1., 0., 0.);
+
+  int slides = 6; // segments
+  int stacks = 1; // rows
+  double scale = self->param_normal_width;
+
+  glPushAttrib(GL_ENABLE_BIT);
+  glEnable(GL_DEPTH_TEST);
+  glPushMatrix();
+  glTranslatef(0, 0, 0);
+  GLUquadricObj *q = gluNewQuadric();
+  gluCylinder(q, 0.005*scale, 0.005*scale, 0.15*scale, slides, stacks); // base
+  glPopMatrix();
+  glPushMatrix();
+  glTranslatef(0, 0, 0.15*scale);
+  GLUquadricObj *q2 = gluNewQuadric();
+  gluCylinder(q2, 0.013*scale, 0.0, 0.05*scale, slides, stacks); // tip
+  glPopMatrix();
+  gluDeleteQuadric(q);
+  gluDeleteQuadric(q2);
+  glPopAttrib();
+
+  glPopMatrix();
+}
+
+
 static void draw_square(RendererCollections *self, double x, double y, double z, double theta, double size) {
   if (!self->viewer) return;
 
@@ -710,7 +774,7 @@ public:
           draw_tetra (self, obj.x, obj.y, z, obj_rpy(2), obj_rpy(1), obj_rpy(0), size, is_last);
           break;
         case VS_OBJECT_COLLECTION_T_AXIS3D:
-          draw_axis (self, obj.x, obj.y, z, obj_rpy(2), obj_rpy(1), obj_rpy(0), size, is_last);
+          draw_axis (self, obj.x, obj.y, z, obj_rpy(2), obj_rpy(1), obj_rpy(0), size, is_last, id);
           break;
         case VS_OBJECT_COLLECTION_T_TREE:
           draw_tree (self, obj.x, obj.y, z);
@@ -720,7 +784,7 @@ public:
           break;
         case VS_OBJECT_COLLECTION_T_CAMERA:
           draw_camera (self, obj.x, obj.y, z, obj_rpy(2), obj_rpy(1), obj_rpy(0), size, is_last);
-          draw_axis(self, obj.x, obj.y, obj.z, obj_rpy(2), obj_rpy(1), obj_rpy(0), size, is_last);
+          draw_axis(self, obj.x, obj.y, obj.z, obj_rpy(2), obj_rpy(1), obj_rpy(0), size, is_last, id);
           break;
         case VS_OBJECT_COLLECTION_T_TRIANGLE:
           draw_equilateral_triangle (self, obj.x, obj.y, z, obj_rpy(2), size, is_last );
@@ -730,7 +794,7 @@ public:
           break;
         case VS_OBJECT_COLLECTION_T_SONARCONE:
           draw_sonarcone(self, obj.x, obj.y, z, obj_rpy(2), obj_rpy(1), obj_rpy(0), size, is_last);
-          draw_axis(self, obj.x, obj.y, obj.z, obj_rpy(2), obj_rpy(1), obj_rpy(0), size, is_last);
+          draw_axis(self, obj.x, obj.y, obj.z, obj_rpy(2), obj_rpy(1), obj_rpy(0), size, is_last, id);
           break;
         }
       }
@@ -1020,6 +1084,7 @@ public:
       my_vs_t & element = it->second;
       float* entries = it->second.entries;
       float* colors = it->second.colors;
+      float* normals = it->second.normals;
 
       if (colors) {
         glEnableClientState(GL_COLOR_ARRAY);
@@ -1039,6 +1104,32 @@ public:
         if (obj_it != objs.end()) {
           vs_object_t& obj = obj_it->second;
           if (obj.id>=range_start && obj.id<=range_end) {
+
+            if (normals){
+              for (int i=1; i< element.npoints;i++){
+                  double normal[3];
+                  normal[0] = normals[i*3];
+                  normal[1] = normals[i*3+1];
+                  normal[2] = normals[i*3+2];
+                  double dist = sqrt(normal[0]*normal[0] + normal[1]*normal[1] + normal[2]*normal[2]);
+                  normal[0] = normal[0]/dist;
+                  normal[1] = normal[1]/dist;
+                  normal[2] = normal[2]/dist;
+                  double pitch = asin(- normal[1] );
+                  double yaw = atan2( normal[0]  , normal[2] );
+                  if (colors){
+                    draw_arrow(self, entries[i*3], entries[i*3+1], entries[i*3+2],   
+                           0, yaw, pitch,
+                           colors[i*4], colors[i*4+1], colors[i*4+2]);
+                  }else{
+                    draw_arrow(self, entries[i*3], entries[i*3+1], entries[i*3+2],   
+                           0, yaw, pitch,
+                           255, 0, 0);
+                  }
+
+              }
+            }
+
             glPushMatrix();
             double z = time_elevation_collection(self, obj.id, obj.z, collection_it->first);
             float* rgb = &::colors[3*(id%num_colors)];
@@ -1252,8 +1343,8 @@ static void draw_collections(RendererCollections *self) {
 
   if (!self->param_z_up) {
     // Viewer is (x,y,z) = (forward,left,up) coordinates
-    //		Collections are in (forward,right,down) coordinates
-    //		We rotate 180 around x-axis
+    //    Collections are in (forward,right,down) coordinates
+    //    We rotate 180 around x-axis
     glRotatef(180.0,1.0,0.0,0.0);
   }
 
@@ -1466,6 +1557,7 @@ static void on_param_widget_changed(BotGtkParamWidget *pw, const char *param, vo
 
   // mfallon: disabled lots of options here as renderer is not used in a SLAM framework: april 2013
   #ifdef EXTRA_CONTROLS
+  self->param_color_axes = bot_gtk_param_widget_get_bool(self->pw, PARAM_COLOR_AXES);
   self->param_use_time = bot_gtk_param_widget_get_bool(self->pw, PARAM_USE_TIME);
   self->param_use_time_collection = bot_gtk_param_widget_get_bool(self->pw, PARAM_USE_TIME_COLLECTION);
   self->param_time_scale = bot_gtk_param_widget_get_double(self->pw, PARAM_TIME_SCALE);
@@ -1480,6 +1572,7 @@ static void on_param_widget_changed(BotGtkParamWidget *pw, const char *param, vo
   #endif
   self->param_point_width = (double)bot_gtk_param_widget_get_double(self->pw, PARAM_POINT_WIDTH_POINTS);
   self->param_pose_width = (double)bot_gtk_param_widget_get_double(self->pw, PARAM_POSE_WIDTH_POSES);  
+  self->param_normal_width = (double)bot_gtk_param_widget_get_double(self->pw, PARAM_NORMAL_WIDTH_NORMAL);
   
   #ifdef EXTRA_CONTROLS
   self->param_z_up = bot_gtk_param_widget_get_bool(self->pw, PARAM_Z_UP);
@@ -1588,7 +1681,9 @@ BotRenderer *renderer_collections_new (BotViewer *viewer, int render_priority, l
   self->param_color_time = PARAM_COLOR_TIME_DEFAULT;
   self->param_point_width = PARAM_POINT_WIDTH_POINTS_DEFAULT;
   self->param_pose_width = PARAM_POSE_WIDTH_POSES_DEFAULT;
+  self->param_normal_width = PARAM_NORMAL_WIDTH_NORMAL_DEFAULT;
   self->param_z_up = PARAM_Z_UP_DEFAULT;
+  self->param_color_axes = PARAM_COLOR_AXES_DEFAULT;
 
   if (viewer) {
     self->renderer.widget = gtk_alignment_new (0, 0.5, 1.0, 0);
@@ -1645,7 +1740,15 @@ BotRenderer *renderer_collections_new (BotViewer *viewer, int render_priority, l
                                     PARAM_POSE_WIDTH_POSES_MIN, PARAM_POSE_WIDTH_POSES_MAX,
                                     PARAM_POSE_WIDTH_POSES_DELTA,
                                     PARAM_POSE_WIDTH_POSES_DEFAULT);
+    bot_gtk_param_widget_add_double(self->pw, PARAM_NORMAL_WIDTH_NORMAL,
+                                    BOT_GTK_PARAM_WIDGET_SLIDER,
+                                    PARAM_NORMAL_WIDTH_NORMAL_MIN, PARAM_NORMAL_WIDTH_NORMAL_MAX,
+                                    PARAM_NORMAL_WIDTH_NORMAL_DELTA,
+                                    PARAM_NORMAL_WIDTH_NORMAL_DEFAULT);
+
     #ifdef EXTRA_CONTROLS
+    bot_gtk_param_widget_add_booleans(self->pw, (BotGtkParamWidgetUIHint)0,
+                                      PARAM_COLOR_AXES, PARAM_COLOR_AXES_DEFAULT, NULL);
     bot_gtk_param_widget_add_booleans(self->pw, (BotGtkParamWidgetUIHint)0,
                                       PARAM_COLOR_TIME, PARAM_COLOR_TIME_DEFAULT, NULL);
     bot_gtk_param_widget_add_booleans(self->pw, (BotGtkParamWidgetUIHint)0,

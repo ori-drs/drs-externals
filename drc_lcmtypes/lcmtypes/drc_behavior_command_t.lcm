@@ -1,0 +1,10 @@
+package drc;
+
+// this used to be part of the drc_atlas messages
+
+struct behavior_command_t 
+{
+    int64_t utime;
+    string command;
+}
+

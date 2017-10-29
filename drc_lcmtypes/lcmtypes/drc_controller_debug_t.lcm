@@ -1,0 +1,45 @@
+package drc;
+
+struct controller_debug_t
+{
+	int64_t utime;
+
+  // QP solution vector
+  int32_t n_alpha;
+  float alpha[n_alpha];
+
+  // torque input vector
+  int32_t n_u;
+  float u[n_u];
+
+  // active support body indices
+  int32_t n_active_supports;
+  float active_supports[n_active_supports];
+  
+  // solver return status
+  int32_t info;
+
+  // qdd desired input to QP
+  int32_t n_q;
+  float qddot_des[n_q];
+
+  // ZMP error
+  float zmp_err[2];
+
+  // active set of inequality constraints
+  int32_t n_active_constraints;
+  float active_constraints[n_active_constraints];   
+
+  // redundant fields for foot contact, useful for plotting in scope
+  float r_foot_contact;
+  float l_foot_contact;
+
+  // desired boy acceleration input to QP
+  int32_t n_body_acc_des;
+  float body_acc_des[n_body_acc_des];
+
+  // individual cops
+  int32_t n_individual_cops;
+  float individual_cops[n_individual_cops];
+}
+
