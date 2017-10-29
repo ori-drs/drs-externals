@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+  <class>panel</class>
+  <widget class="QWidget" name="panel">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>465</width>
+        <height>980</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>Dift Driver</string>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="spacing">
+        <number>0</number>
+      </property>
+      <property name="margin">
+        <number>0</number>
+      </property>
+      <item>
+        <widget class="QScrollArea" name="scrollArea">
+          <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+            </sizepolicy>
+          </property>
+          <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="widgetResizable">
+            <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+            <property name="geometry">
+              <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>465</width>
+                <height>980</height>
+              </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+              <item>
+                <widget class="QWidget" name="widget" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_2"/>
+                </widget>
+              </item>
+              <item>
+                <widget class="QGroupBox" name="diftCameraControl">
+                  <property name="minimumSize">
+                    <size>
+                      <width>0</width>
+                      <height>0</height>
+                    </size>
+                  </property>
+                  <property name="title">
+                    <string>Run config</string>
+                  </property>
+                  <property name="flat">
+                    <bool>false</bool>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_1">
+                    <item>
+                      <widget class="QLabel" name="loadSegmentsLocationLabel">
+                        <property name="text">
+                          <string>Run:</string>
+                        </property>
+                      </widget>
+                    </item>
+                    <item>
+                      <widget class="QLabel" name="loadSegmentsLocationText">
+                        <property name="text">
+                          <string>/tmp/dift/</string>
+                        </property>
+                      </widget>
+                    </item>
+                    <item>
+                      <widget class="QPushButton" name="loadSegmentsLocationButton">
+                        <property name="text">
+                          <string>Browse</string>
+                        </property>
+                      </widget>
+                    </item>
+                  </layout>
+                </widget>
+              </item>
+              <item>
+                <widget class="QGroupBox" name="diftCameraControl">
+                  <property name="minimumSize">
+                    <size>
+                      <width>0</width>
+                      <height>0</height>
+                    </size>
+                  </property>
+                  <property name="title">
+                    <string>Camera Controls</string>
+                  </property>
+                  <property name="flat">
+                    <bool>false</bool>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_2">
+                    <item>
+                      <widget class="QPushButton" name="overheadButton">
+                        <property name="text">
+                          <string>Overhead</string>
+                        </property>
+                      </widget>
+                    </item>
+                    <item>
+                      <widget class="QPushButton" name="drawSegmentsButton">
+                        <property name="text">
+                          <string>Draw Segs</string>
+                        </property>
+                      </widget>
+                    </item>
+                  </layout>
+                </widget>
+              </item>
+              <item>
+                <widget class="QGroupBox" name="diftToggleColours">
+                  <property name="minimumSize">
+                    <size>
+                      <width>0</width>
+                      <height>0</height>
+                    </size>
+                  </property>
+                  <property name="title">
+                    <string>Toggles</string>
+                  </property>
+                  <property name="flat">
+                    <bool>false</bool>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_3">
+                    <item>
+                      <widget class="QCheckBox" name="targetColorCheckBox">
+                        <property name="text">
+                          <string>Target</string>
+                        </property>
+                      </widget>
+                    </item>
+                    <item>
+                      <widget class="QCheckBox" name="transformedTargetColorCheckBox">
+                        <property name="text">
+                          <string>Transformed</string>
+                        </property>
+                      </widget>
+                    </item>
+                    <item>
+                      <widget class="QCheckBox" name="sourceColorCheckBox">
+                        <property name="text">
+                          <string>Source</string>
+                        </property>
+                      </widget>
+                    </item>
+                    <item>
+                      <widget class="QCheckBox" name="centroidsCheckBox">
+                        <property name="text">
+                          <string>Centroids</string>
+                        </property>
+                      </widget>
+                    </item>
+                  </layout>
+                </widget>
+              </item>
+              <item>
+                <widget class="QGroupBox" name="proposalPicker">
+                  <property name="minimumSize">
+                    <size>
+                      <width>0</width>
+                      <height>0</height>
+                    </size>
+                  </property>
+                  <property name="title">
+                    <string>Visualize Proposals/Matches</string>
+                  </property>
+                  <property name="flat">
+                    <bool>false</bool>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                    <item>
+                      <widget class="QPushButton" name="setTargetButton">
+                        <property name="text">
+                          <string>Select Target...</string>
+                        </property>
+                      </widget>
+                    </item>
+                    <item>
+                      <widget class="QLabel" name="selectedObjectNameLabel">
+                        <property name="text">
+                          <string/>
+                        </property>
+                      </widget>
+                    </item>
+                  </layout>
+                </widget>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_5">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Selected Cloud:</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QLabel" name="selectedProposalSourceCloudText">
+                      <property name="text">
+                        <string>None</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Selected Swathe:</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QLabel" name="selectedProposalSwatheText">
+                      <property name="text">
+                        <string>None</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                  <item>
+                    <widget class="QPushButton" name="visualizeProposalsButton">
+                      <property name="text">
+                        <string>Visualize Proposals</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QPushButton" name="resetVisualizationButton">
+                      <property name="text">
+                        <string>Reset</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <widget class="QGroupBox" name="labelling">
+                  <property name="minimumSize">
+                    <size>
+                      <width>0</width>
+                      <height>0</height>
+                    </size>
+                  </property>
+                  <property name="title">
+                    <string>Label Segments</string>
+                  </property>
+                  <property name="flat">
+                    <bool>false</bool>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_8">
+                    <item>
+                      <widget class="QPushButton" name="setSourceCloud">
+                        <property name="text">
+                          <string>Select &amp;Source Cloud</string>
+                        </property>
+                      </widget>
+                    </item>
+                  </layout>
+                  <layout class="QHBoxLayout" name="horizontalLayout_9">
+                    <item>
+                      <widget class="QPushButton" name="setTargetCloud">
+                        <property name="text">
+                          <string>Select &amp;Target Cloud</string>
+                        </property>
+                      </widget>
+                    </item>
+                  </layout>
+                </widget>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_10">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Labelling Source:</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QLabel" name="selectedSourceSegmentLabel">
+                      <property name="text">
+                        <string>None</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QLabel" name="selectedSourceSegmentSwatheLabel">
+                      <property name="text">
+                        <string>None</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Labelling Target: </string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QLabel" name="selectedTargetSegmentLabel">
+                      <property name="text">
+                        <string>None</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QLabel">
+                      <property name="text">
+                        <string></string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_12">
+                  <item>
+                    <widget class="QCheckBox" name="hideSourceLabelCheckBox">
+                      <property name="text">
+                        <string>Hide Source Label</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_13">
+                  <item>
+                    <widget class="QPushButton" name="previewLabelButton">
+                      <property name="text">
+                        <string>Previe&amp;w Match</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_14">
+                  <item>
+                    <widget class="QPushButton" name="confirmLabelButton">
+                      <property name="text">
+                        <string>&amp;Confirm Match</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QPushButton" name="cancelLabelButton">
+                      <property name="text">
+                        <string>Canc&amp;el Match</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_15">
+                  <item>
+                    <widget class="QPushButton" name="saveLabelButton">
+                      <property name="text">
+                        <string>Save Labels</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <widget class="QGroupBox" name="preivewLabelling">
+                  <property name="minimumSize">
+                    <size>
+                      <width>0</width>
+                      <height>0</height>
+                    </size>
+                  </property>
+                  <property name="title">
+                    <string>Preview Labels</string>
+                  </property>
+                  <property name="flat">
+                    <bool>false</bool>
+                  </property>
+                </widget>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_16">
+                  <item>
+                    <widget class="QPushButton" name="previewLabelledDataButton">
+                      <property name="text">
+                        <string>Preview Labelled Data</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QPushButton" name="exitPreviewLabelledDataButton">
+                      <property name="text">
+                        <string>Exit Preview</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_17">
+                  <item>
+                    <widget class="QPushButton" name="nextMatchButton">
+                      <property name="text">
+                        <string>Ne&amp;xt Match</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QPushButton" name="previousMatchButton">
+                      <property name="text">
+                        <string>Pre&amp;vious Match</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_18">
+                  <item>
+                    <widget class="QPushButton" name="deleteMatchButton">
+                      <property name="text">
+                        <string>&amp;Delete Match</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QPushButton" name="undoDeleteMatchButton">
+                      <property name="text">
+                        <string>&amp;Undo Deletion</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_18">
+                  <item>
+                    <widget class="QPushButton" name="saveLabelledMatchesButton">
+                      <property name="text">
+                        <string>Save Labels</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_19">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Swathe:</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QLabel" name="labelledDataSwatheIdLabel">
+                      <property name="text">
+                        <string>None</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_20">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Labels Count:</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QLabel" name="labelledDataShownSegments">
+                      <property name="text">
+                        <string>None</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <widget class="QGroupBox" name="previewLabelling">
+                  <property name="minimumSize">
+                    <size>
+                      <width>0</width>
+                      <height>0</height>
+                    </size>
+                  </property>
+                  <property name="title">
+                    <string>Misc Options</string>
+                  </property>
+                  <property name="flat">
+                    <bool>false</bool>
+                  </property>
+                </widget>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_21">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Grid Size</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QDoubleSpinBox" name="gridSizeSpinBox">
+                      <property name="maximum">
+                        <double>20.000000000000000</double>
+                      </property>
+                      <property name="minimum">
+                        <double>0.500000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                        <double>0.50000000000000</double>
+                      </property>
+                      <property name="value">
+                        <double>0.500000000000000</double>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_22">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Map X Offset</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QDoubleSpinBox" name="mapXOffsetSpinBox">
+                      <property name="maximum">
+                        <double>5000.000000000000000</double>
+                      </property>
+                      <property name="minimum">
+                        <double>-5000.00000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                        <double>0.50000000000000</double>
+                      </property>
+                      <property name="value">
+                        <double>0.00000000000000</double>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_23">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Map Y Offset</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QDoubleSpinBox" name="mapYOffsetSpinBox">
+                      <property name="maximum">
+                        <double>5000.000000000000000</double>
+                      </property>
+                      <property name="minimum">
+                        <double>-5000.00000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                        <double>0.50000000000000</double>
+                      </property>
+                      <property name="value">
+                        <double>0.00000000000000</double>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_24">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Map Z Offset</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QDoubleSpinBox" name="mapZOffsetSpinBox">
+                      <property name="maximum">
+                        <double>500.000000000000000</double>
+                      </property>
+                      <property name="minimum">
+                        <double>-500.00000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                        <double>0.50000000000000</double>
+                      </property>
+                      <property name="value">
+                        <double>0.00000000000000</double>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_25">
+                  <item>
+                    <widget class="QLabel" name="label">
+                      <property name="text">
+                        <string>Source Yaw</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QDoubleSpinBox" name="sourceOffsetSpinBox">
+                      <property name="maximum">
+                        <double>360.000000000000000</double>
+                      </property>
+                      <property name="minimum">
+                        <double>0.00000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                        <double>0.50000000000000</double>
+                      </property>
+                      <property name="value">
+                        <double>0.00000000000000</double>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_26">
+                  <item>
+                    <widget class="QPushButton" name="saveConfig">
+                      <property name="text">
+                        <string>Save Config</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <widget class="QGroupBox" name="labelling">
+                  <property name="minimumSize">
+                    <size>
+                      <width>0</width>
+                      <height>0</height>
+                    </size>
+                  </property>
+                  <property name="title">
+                    <string>Preview Statistics</string>
+                  </property>
+                  <property name="flat">
+                    <bool>false</bool>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_27">
+                    <item>
+                      <widget class="QPushButton" name="viewTableStatsButton">
+                        <property name="text">
+                          <string>View Segmens stats</string>
+                        </property>
+                      </widget>
+                    </item>
+                  </layout>
+                </widget>
+              </item>
+              <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_28">
+                  <item>
+                    <widget class="QPushButton" name="visualizeFeatureSpaceButton">
+                      <property name="text">
+                        <string>Visualize Feature Space</string>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <spacer name="verticalSpacer">
+                  <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                    <size>
+                      <width>17</width>
+                      <height>0</height>
+                    </size>
+                  </property>
+                </spacer>
+              </item>
+            </layout>
+          </widget>
+        </widget>
+      </item>
+    </layout>
+  </widget>
+  <resources/>
+  <connections/>
+</ui>
