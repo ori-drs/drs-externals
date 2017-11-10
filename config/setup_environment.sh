@@ -40,4 +40,4 @@ alias rungazingdemo='bot-procman-sheriff -l $DRS_BASE/software/config/husky/husk
 alias lcm_rec_logs='cd ~/logs/lcm/;lcm-logger';
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DRS_BASE/software/build/lib
-export PATH=$PATH:/home/ori/code/director/build/install/bin
+export PATH=$PATH:/home/$(whoami)/code/director/build/install/bin
