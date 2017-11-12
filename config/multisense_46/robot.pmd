@@ -1,10 +1,10 @@
 group "0.params_and_model_pub" {
     cmd "pserver" {
-        exec = "bot-param-server $DRC_BASE/code_externals/config/multisense_46/robot.cfg";
+        exec = "bot-param-server $DRS_BASE/externals/config/multisense_46/robot.cfg";
         host = "localhost";
     }
     cmd "model" {
-        exec = "rosrun model_client robot_model_publisher $DRC_BASE/code_externals/models/common_components/multisense_sl/multisense_sl.urdf";
+        exec = "rosrun model_client robot_model_publisher $DRS_BASE/code/src/models_ori/multisense_sl_ori/multisense_sl.urdf";
         host = "localhost";
     }
 }
@@ -28,7 +28,7 @@ group "2.vis" {
 
 
     cmd "director" {
-        exec = "director -c $DRC_BASE/code_externals/config/multisense_46/robot.cfg  --director_config $DRC_BASE/code_externals/models/common_components/multisense_sl/director_config.json";
+        exec = "director -c $DRS_BASE/externals/config/multisense_46/robot.cfg  --director_config $DRS_BASE/code/src/models_ori/multisense_sl_ori/director_config.json";
         host = "localhost";
     }
 }
