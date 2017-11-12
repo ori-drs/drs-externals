@@ -4,7 +4,7 @@ group "0.params_and_model_pub" {
         host = "localhost";
     }
     cmd "model" {
-        exec = "robot_model_publisher $DRS_BASE/externals/models/anymal_description/model.urdf";
+        exec = "rosrun model_client robot_model_publisher $DRS_BASE/externals/models/anymal_description/model_laser.urdf";
         host = "localhost";
     }
     cmd "core" {
@@ -14,33 +14,33 @@ group "0.params_and_model_pub" {
 }
 
 group "1.sim" {
-    cmd "gazebo" {
-        exec = "roslaunch husky_gazebo_rpg anymal_sim.launch";
+    cmd "gazebo_laser" {
+        exec = "roslaunch anymal_ori sim.launch";
+        host = "localhost";
+    }
+    cmd "gazebo_realsense" {
+        exec = "roslaunch anymal_ori sim.launch anymal_setup:=realsense";
         host = "localhost";
     }
     cmd "ros2lcm" {
-        exec = "rosrun husky_translators ros2lcm_anymal";
+        exec = "rosrun anymal_ori ros2lcm_anymal";
         host = "localhost";
     }
-    cmd "lcm2ros" {
-        exec = "rosrun husky_translators lcm2ros_anymal";
+    cmd "state-sync-anymal" {
+        exec = "rosrun motion_estimate state-sync-simple-anymal.py";
         host = "localhost";
-    }
-    cmd "se-state-sync-simple" {
-        exec = "se-state-sync-simple";
-        host = "localhost";
-    }
+    }    
 }
 
 
 group "2.vis" {
     cmd "pronto-viewer" {
-        exec = "pronto-viewer -c husky/robot.cfg";
+        exec = "rosrun pronto_viewer pronto_viewer -c anymal/robot.cfg";
         host = "localhost";
     }
 
     cmd "director" {
-        exec = "director -anymal -c $DRS_BASE/externals/config/anymal/robot.cfg --startup $DRS_BASE/externals/ui_modules/huskydirector/runstartup.py";
+        exec = "director -anymal --startup $DRS_BASE/externals/ui_modules/huskydirector/runstartup.py";
         host = "localhost";
     }
 }
@@ -51,11 +51,23 @@ group "3.maps-server" {
         host = "localhost";
     }
     cmd "maps" {
-        exec = "maps-server";
+        exec = "rosrun maps_server maps-server -l MULTISENSE_SCAN";
         host = "localhost";
     }
     cmd "data-request-server" {
-        exec = "data-request-server";
+        exec = "rosrun  maps_server data-request-server";
         host = "localhost";
     }
 }
+
+group "4.path-follower" {
+    cmd "path-follower" {
+        exec = "rosrun  drs_control husky-path-follower";
+        host = "localhost";
+    }
+    cmd "follower-bridge" {
+        exec = "rosrun  motion_estimate path_follower_lcm2ros.py";
+        host = "localhost";
+    }
+}
+
