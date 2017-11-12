@@ -1,4 +1,4 @@
-sys.path.append(os.path.join(director.getDRCBaseDir(), 'software/ui_modules'))
+sys.path.append(os.path.join(director.getDRCBaseDir(), 'externals/ui_modules'))
 
 import huskydirector.startup
 huskydirector.startup.startup(robotSystem, globals())

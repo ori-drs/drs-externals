@@ -1,10 +1,10 @@
 group "0.params_and_model_pub" {
     cmd "pserver" {
-        exec = "bot-param-server $DRC_BASE/software/config/anymal/robot.cfg";
+        exec = "bot-param-server $DRS_BASE/externals/config/anymal/robot.cfg";
         host = "localhost";
     }
     cmd "model" {
-        exec = "robot_model_publisher $DRC_BASE/software/models/anymal_description/model.urdf";
+        exec = "robot_model_publisher $DRS_BASE/externals/models/anymal_description/model.urdf";
         host = "localhost";
     }
     cmd "core" {
@@ -40,7 +40,7 @@ group "2.vis" {
     }
 
     cmd "director" {
-        exec = "director -anymal -c $DRC_BASE/software/config/anymal/robot.cfg --startup $DRC_BASE/software/ui_modules/huskydirector/runstartup.py";
+        exec = "director -anymal -c $DRS_BASE/externals/config/anymal/robot.cfg --startup $DRS_BASE/externals/ui_modules/huskydirector/runstartup.py";
         host = "localhost";
     }
 }
