@@ -119,5 +119,5 @@
   "handCombinations": [],
 
   "userConfig" : [],
-  "disableComponents" : ["useHumanoidDRCDemos","useConvexHullModel", "useAtlasDriver", "useFootsteps", "useControllerRate", "useCOPMonitor", "useHands", "useLCMGL","usePlanning", "useIk"]
+  "disableComponents" : ["useHumanoidDRCDemos","useConvexHullModel", "useAtlasDriver", "useFootsteps", "useControllerRate", "useCOPMonitor", "useHands", "useLCMGL","usePlanning", "useIk", "useCOMMonitor"]
 }

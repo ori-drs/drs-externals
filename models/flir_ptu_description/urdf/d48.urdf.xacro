@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<robot name="ptu_d48"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="pan_velocity" value="1.0" />
+  <xacro:property name="pan_range" value="2.775" />
+  <xacro:property name="tilt_velocity" value="1.0" />
+  <xacro:property name="tilt_up_range" value="0.52" />
+  <xacro:property name="tilt_down_range" value="0.82" />
+  <xacro:property name="joint_effort" value="30" />
+  <xacro:property name="mass" value="0.05" />
+  <xacro:property name="dynamic_damping" value="1.0" />
+
+  <xacro:macro name="ptu_d48" params="name">
+    <link name="${name}_base_link">
+      <collision>
+        <origin xyz="0 0 0" />
+        <geometry>
+          <box size="0.121 0.110 0.091"/> <!-- values taken from empiral evaluation of meshes -->
+        </geometry>
+      </collision>
+
+      <visual>
+        <material name="ptu_body_color">
+          <color rgba="0.3 0.3 0.3 1.0" />
+        </material>
+        <geometry>
+          <mesh filename="package://flir_ptu_description/urdf/meshes/d48_ptu_base.dae"/>
+        </geometry>
+        <origin xyz="0 0 0" />
+      </visual>
+
+      <inertial>
+        <mass value="${mass}" />
+        <!-- Simulation only, so that the Multisense can work -->
+        <inertia
+        ixx="1.5e-2" ixy="0.0" ixz="0.0"
+        iyy="1.5e-2" iyz="0.0"
+        izz="1.5e-2"/>
+
+        <!-- Real inertia -->
+        <!-- <inertia
+          ixx="9.371005432627199e-07" ixy="3.10026015620000e-16" ixz="-3.39562594304000e-09"
+          iyy="9.56174224588800e-07" iyz="1.28326981000000e-18"
+          izz="1.05415224328192e-06"/>  --><!-- values taken from empiral evaluation of meshes -->
+      </inertial>
+    </link>
+
+    <link name="${name}_pan_link">
+      <collision>
+        <origin xyz="0 0 0" />
+        <geometry>
+          <box size="0.138 0.122 0.161"/> <!-- values taken from empiral evaluation of meshes -->
+        </geometry>
+      </collision>
+
+      <visual>
+        <material name="ptu_body_color">
+          <color rgba="0.3 0.3 0.3 1.0" />
+        </material>
+        <geometry>
+          <mesh filename="package://flir_ptu_description/urdf/meshes/d48_ptu_body.dae"/>
+        </geometry>
+        <origin xyz="0 0 0" />
+      </visual>
+
+      <inertial>
+        <mass value="${mass}" />
+        <!-- Simulation only, so that the Multisense can work -->
+        <inertia
+        ixx="1.5e-2" ixy="0.0" ixz="0.0"
+        iyy="1.5e-2" iyz="0.0"
+        izz="1.5e-2"/>
+
+        <!-- Real inertia -->
+        <!-- <inertia
+          ixx="5.541219836887040e-06" ixy="-3.017364750000000e-14" ixz="-8.729511591936000e-08"
+          iyy="6.288134782320639e-06" iyz="-9.609700000000000e-22"
+          izz="5.364587629117440e-06"/>  --><!-- values taken from empiral evaluation of meshes -->
+      </inertial>
+    </link>
+
+    <link name="${name}_tilt_link">
+      <collision>
+        <origin xyz="0 0 0" />
+        <geometry>
+          <box size="0.053 0.136 0.072"/> <!-- values taken from empiral evaluation of meshes -->
+        </geometry>
+      </collision>
+
+      <visual>
+        <material name="ptu_body_color">
+          <color rgba="0.3 0.3 0.3 1.0" />
+        </material>
+        <geometry>
+          <mesh filename="package://flir_ptu_description/urdf/meshes/d48_ptu_mount.dae"/>
+        </geometry>
+        <origin xyz="0 0 0" />
+      </visual>
+
+      <inertial>
+        <mass value="${mass}" />
+        <!-- Simulation only, so that the Multisense can work -->
+        <inertia
+        ixx="1.5e-2" ixy="0.0" ixz="0.0"
+        iyy="1.5e-2" iyz="0.0"
+        izz="1.5e-2"/>
+
+        <!-- Real inertia -->
+        <!-- <inertia 
+          ixx="0.403229019996160e-06" ixy="0.000003637781440e-06" ixz="-0.000000000265620e-06"
+          iyy="0.079419114782720e-06" iyz="0.000000000000384e-06"
+          izz="3.654664847360000e-06"/>  --><!-- values taken from empiral evaluation of meshes -->
+      </inertial>
+    </link>
+
+    <link name="${name}_mount_link" />
+
+    <!-- There's an offset between the origin of the pan joint and the origin of 
+         the overall device, which is between the mounting screws on its base. -->
+    <joint name="${name}_pan" type="revolute">
+      <parent link="${name}_base_link"/>
+      <child link="${name}_pan_link"/>
+      <origin xyz="0 0 0.092"/>
+      <axis xyz="0 0 -1" />
+      <limit lower="${-pan_range}" upper="${pan_range}"
+             effort="${joint_effort}" velocity="${pan_velocity}" />
+      <dynamics friction="10.0" damping="${dynamic_damping}"/>
+    </joint>
+
+    <!-- The tilt joint -->
+    <joint name="${name}_tilt" type="revolute">
+      <parent link="${name}_pan_link" />
+      <origin xyz="0 0 0.13" />
+      <child link="${name}_tilt_link" />
+      <axis xyz="0 -1 0" />
+      <limit lower="${-tilt_down_range}" upper="${tilt_up_range}"
+             effort="${joint_effort}" velocity="${tilt_velocity}" />
+      <dynamics friction="10.0" damping="${dynamic_damping}"/>
+    </joint>
+
+    <!-- Fixed joint to provide a convenient attachment point for accessories. -->
+    <joint name="${name}_mount" type="fixed">
+      <parent link="${name}_tilt_link"/>
+      <child link="${name}_mount_link"/>
+      <origin xyz="0 0 0.046" />
+    </joint>
+  </xacro:macro>
+</robot>

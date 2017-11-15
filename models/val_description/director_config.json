@@ -207,5 +207,5 @@
 
   "userConfig" : [],
   "enableComponents": ["useLimitJointsSentToPlanner", "useOpenniDepthImage"],
-  "disableComponents" : ["useAtlasDriver","useHumanoidDRCDemos","useLCMGL"]
+  "disableComponents" : ["useLCMGL"]
 }

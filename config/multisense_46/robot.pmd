@@ -28,7 +28,7 @@ group "2.vis" {
 
 
     cmd "director" {
-        exec = "director -c $DRS_BASE/externals/config/multisense_46/robot.cfg  --director_config $DRS_BASE/code/src/models_ori/multisense_sl_ori/director_config.json";
+        exec = "director -c $DRS_BASE/externals/config/multisense_46/robot.cfg  --director_config $DRS_BASE/externals/models/multisense_sl/director_config.json";
         host = "localhost";
     }
 }

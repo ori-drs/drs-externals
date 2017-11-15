@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<robot name="300Arch">
+  <joint name="top_plate_to_300Arch" type="fixed">
+    <parent link="top_plate_link"/>
+    <child link="300Arch"/>
+    <origin xyz="-0.28 0.0 0.15" rpy="0.0 0.0 3.14159"/>
+  </joint>
+
+  <link name="300Arch">
+    <visual>
+      <geometry>
+        <mesh filename="package://husky_description_rpg/urdf/accessories/meshes/300Arch_short.dae"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.6 0.6 0.6 1"/>
+      </material>
+    </visual>
+  </link>
+</robot>
