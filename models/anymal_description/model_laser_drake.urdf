@@ -67,7 +67,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/base/anymal_base_2.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/base/anymal_base_2.dae" scale="0.001 0.001     0.001"/>
       </geometry>
       <material name="anymal_material"/>
     </visual>
@@ -114,7 +114,7 @@
     <visual>
       <origin rpy="0 0 0.0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/hip/anymal_hip_l.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/hip/anymal_hip_l.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -145,7 +145,7 @@
     <visual>
       <origin rpy="0 0 0.0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/thigh/anymal_thigh_l.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/thigh/anymal_thigh_l.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -182,7 +182,7 @@
     <visual>
       <origin rpy="0 0 0.0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/shank/anymal_shank_2_l.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/shank/anymal_shank_2_l.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -226,7 +226,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/foot/anymal_foot_2.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/foot/anymal_foot_2.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -271,7 +271,7 @@
     <visual>
       <origin rpy="0 0 0.0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/hip/anymal_hip_r.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/hip/anymal_hip_r.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -302,7 +302,7 @@
     <visual>
       <origin rpy="0 0 0.0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/thigh/anymal_thigh_r.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/thigh/anymal_thigh_r.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -339,7 +339,7 @@
     <visual>
       <origin rpy="0 0 0.0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/shank/anymal_shank_2_r.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/shank/anymal_shank_2_r.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -383,7 +383,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/foot/anymal_foot_2.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/foot/anymal_foot_2.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -428,7 +428,7 @@
     <visual>
       <origin rpy="0 0 -3.14159265359" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/hip/anymal_hip_r.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/hip/anymal_hip_r.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -459,7 +459,7 @@
     <visual>
       <origin rpy="0 0 -3.14159265359" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/thigh/anymal_thigh_r.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/thigh/anymal_thigh_r.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -496,7 +496,7 @@
     <visual>
       <origin rpy="0 0 -3.14159265359" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/shank/anymal_shank_2_r.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/shank/anymal_shank_2_r.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -540,7 +540,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/foot/anymal_foot_2.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/foot/anymal_foot_2.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -585,7 +585,7 @@
     <visual>
       <origin rpy="0 0 -3.14159265359" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/hip/anymal_hip_l.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/hip/anymal_hip_l.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -616,7 +616,7 @@
     <visual>
       <origin rpy="0 0 -3.14159265359" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/thigh/anymal_thigh_l.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/thigh/anymal_thigh_l.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -653,7 +653,7 @@
     <visual>
       <origin rpy="0 0 -3.14159265359" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/shank/anymal_shank_2_l.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/shank/anymal_shank_2_l.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -697,7 +697,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://anymal_description_ori/urdf/foot/anymal_foot_2.dae" scale="0.001 0.001     0.001"/>
+        <mesh filename="package://anymal_description/urdf/foot/anymal_foot_2.dae" scale="0.001 0.001     0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -817,7 +817,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://actuated_lidar_description_ori/mesh/case_fix.dae" scale=".001 .001 .001"/>
+        <mesh filename="package://actuated_lidar_description/mesh/case_fix.dae" scale=".001 .001 .001"/>
       </geometry>
     </visual>
     <visual>
@@ -878,13 +878,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://actuated_lidar_description_ori/mesh/case_moving.dae" scale=".001 .001 .001"/>
+        <mesh filename="package://actuated_lidar_description/mesh/case_moving.dae" scale=".001 .001 .001"/>
       </geometry>
     </visual>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://actuated_lidar_description_ori/mesh/hokuyo_utm_30lx.dae"/>
+        <mesh filename="package://actuated_lidar_description/mesh/hokuyo_utm_30lx.dae"/>
       </geometry>
       <material name="">
         <color rgba="0.72941 0.35686 0.023529 1"/>
