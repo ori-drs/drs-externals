@@ -56,5 +56,5 @@
   ],
 
   "userConfig" : [],
-  "disableComponents" : ["usePlanning","useHumanoidDRCDemos","useConvexHullModel","useIk", "useAtlasDriver", "useFootsteps", "useControllerRate", "useCOPMonitor", "useCOMMonitor", "useLCMGL"]
+  "disableComponents" : ["usePlanning","useHumanoidDRCDemos","useConvexHullModel","useIk", "useAtlasDriver", "useFootsteps", "useControllerRate", "useCOPMonitor", "useCOMMonitor", "useLCMGL", "useQuadrupedDemos"]
 }

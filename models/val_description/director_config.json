@@ -207,5 +207,5 @@
 
   "userConfig" : [],
   "enableComponents": ["useLimitJointsSentToPlanner", "useOpenniDepthImage"],
-  "disableComponents" : ["useLCMGL"]
+  "disableComponents" : ["useLCMGL", "useQuadrupedDemos"]
 }

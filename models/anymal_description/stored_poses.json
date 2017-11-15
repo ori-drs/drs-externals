@@ -1,0 +1,46 @@
+{
+  "General": [
+    {
+      "allow_mirror": true,
+      "description": "arm up pregrasp",
+      "joints": {
+        "LF_HAA": -1.2,
+        "LF_HFE": 1.35,
+        "LF_KFE": 0,
+        "RF_HAA": -1.45,
+        "RF_HFE": 0,
+        "RF_KFE": 0.0
+      },
+      "name": "arm up pregrasp",
+      "nominal_handedness": "none"
+    },
+    {
+      "allow_mirror": true,
+      "description": "twist and shout",
+      "joints": {
+        "base_pitch": -9.747346568892656e-05,
+        "base_roll": 1.301681958738312e-05,
+        "base_x": -0.003912547760414715,
+        "base_y": -0.0001413872364394828,
+        "base_yaw": -0.8069876675282266,
+        "base_z": 0.3610607772973932
+      },
+      "name": "twist and shout",
+      "nominal_handedness": "none"
+    },
+    {
+      "allow_mirror": true,
+      "description": "twist and shout 2",
+      "joints": {
+        "base_pitch": -7.77291028332298e-05,
+        "base_roll": 1.578045914858591e-05,
+        "base_x": 6.823883386870412e-06,
+        "base_y": -0.0001412566268021756,
+        "base_yaw": -0.7368412298999956,
+        "base_z": 0.3527248577005408
+      },
+      "name": "twist and shout 2",
+      "nominal_handedness": "none"
+    }
+  ]
+}
