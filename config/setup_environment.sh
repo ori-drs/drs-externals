@@ -6,8 +6,8 @@ export DRC_BASE=$DIR
 
 export PATH=$DRS_BASE/externals/build/bin:$PATH
 export PKG_CONFIG_PATH=$DRS_BASE/externals/build/lib/pkgconfig:$PKG_CONFIG_PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DRS_BASE/externals/build/lib:$DRS_BASE/externals/build/lib64
-export PYTHONPATH=$PYTHONPATH:$DRS_BASE/externals/build/lib/python2.7/dist-packages:$DRS_BASE/externals/build/lib/python2.7/site-packages
+export LD_LIBRARY_PATH=$DRS_BASE/externals/build/lib:$DRS_BASE/externals/build/lib64:$LD_LIBRARY_PATH
+export PYTHONPATH=$DRS_BASE/externals/build/lib/python2.7/dist-packages:$DRS_BASE/externals/build/lib/python2.7/site-packages:$PYTHONPATH
 # bot_core requires glib and glibconfig
 export CPATH=$CPATH:/usr/include/glib-2.0:/usr/lib/x86_64-linux-gnu/glib-2.0/include
 
