@@ -48,6 +48,7 @@
   ],
   "fixedPointFile" : "husky_fp.mat",
   "postureDatabaseFile" : "./stored_poses.json",
+  "pelvisLink" : "base_link",
   "headLink" : "head",
 
 
@@ -55,5 +56,5 @@
   ],
 
   "userConfig" : [],
-  "disableComponents" : ["usePlanning","useHumanoidDRCDemos","useConvexHullModel","useIk", "useAtlasDriver", "useFootsteps", "useControllerRate", "useCOPMonitor", "useCOMMonitor"]
+  "disableComponents" : ["usePlanning","useHumanoidDRCDemos","useConvexHullModel","useIk", "useAtlasDriver", "useFootsteps", "useControllerRate", "useCOPMonitor", "useCOMMonitor", "useLCMGL", "useQuadrupedDemos"]
 }

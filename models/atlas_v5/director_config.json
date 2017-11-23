@@ -214,5 +214,5 @@
   ],
 
   "userConfig" : [],
-  "disableComponents" : ["useAtlasDriver","useHumanoidDRCDemos"]
+  "disableComponents" : ["useAtlasDriver","useHumanoidDRCDemos","useLCMGL"]
 }

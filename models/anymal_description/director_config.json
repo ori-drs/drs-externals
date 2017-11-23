@@ -92,8 +92,7 @@
     "LH_KFE",
     "RH_HAA",
     "RH_HFE",
-    "RH_KFE",
-    "actuated_lidar_front_dynamixel"
+    "RH_KFE"
   ],
   "fixedPointFile" : "anymal_fp.mat",
   "leftFootMeshFiles" : ["meshes/foot_Left_7_5_degrees.stl"],
@@ -119,5 +118,5 @@
   "handCombinations": [],
 
   "userConfig" : [],
-  "disableComponents" : ["useHumanoidDRCDemos","useConvexHullModel", "useAtlasDriver", "useFootsteps", "useControllerRate", "useCOPMonitor", "useHands", "useLCMGL","usePlanning", "useIk"]
+  "disableComponents" : ["useHumanoidDRCDemos","useConvexHullModel", "useAtlasDriver", "useFootsteps", "useControllerRate", "useCOPMonitor", "useHands", "useLCMGL","usePlanning", "useIk", "useCOMMonitor"]
 }

@@ -1,0 +1,36 @@
+{
+  "modelName" : "multisense_sl",
+  "urdfConfig": {
+    "default": "./multisense_sl.urdf",
+    "robotState": "./multisense_sl.urdf",
+    "ik":         "./multisense_sl.urdf",
+    "chull":      "./multisense_sl.urdf",
+    "playback":   "./multisense_sl.urdf",
+    "teleop":     "./multisense_sl.urdf"
+  },
+  "colorMode": "Textures",
+
+  "teleopJointGroups" : [
+    ],
+
+  "drakeJointNames": [
+    "base_x",
+    "base_y",
+    "base_z",
+    "base_roll",
+    "base_pitch",
+    "base_yaw",
+   "hokuyo_joint"
+  ],
+  "robotStateJointNames": [
+   "hokuyo_joint"
+  ],
+  "fixedPointFile" : "multisense_sl_fp.mat",
+
+  "handCombinations": [
+  ],
+
+  "userConfig" : ["fixedBaseArm"],
+  "headLink" : "head",
+  "disableComponents" : ["useHumanoidDRCDemos","useConvexHullModel", "useAtlasDriver", "useFootsteps", "useControllerRate", "useCOPMonitor", "useHands", "useLCMGL", "useCOMMonitor", "useIK","usePlanning"]  
+}

@@ -987,7 +987,7 @@ trunk_imu because the DLS HW interfaces hardcoded that name
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://hokuyo_description/meshes/hokuyo_utm30lx/hokuyo_utm_30lx.dae" scale="0.0254 0.0254 0.0254"/>
+        <mesh filename="package://hyq_description/meshes/hokuyo_utm30lx/hokuyo_utm_30lx.dae" scale="0.0254 0.0254 0.0254"/>
       </geometry>
     </visual>
     <!-- ignore the collision element -->
@@ -1502,7 +1502,7 @@ trunk_imu because the DLS HW interfaces hardcoded that name
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://sensors_description/meshes/sensors/asus_xtion.dae" scale="1 1 1"/>
+        <mesh filename="package://hyq_description/meshes/sensors/asus_xtion.dae" scale="1 1 1"/>
       </geometry>
       <material name="gray">
         <color rgba="0.5 0.5 0.5 1"/>

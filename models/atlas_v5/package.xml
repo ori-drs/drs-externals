@@ -1,3 +1,19 @@
+<?xml version="1.0"?>
 <package>
+  <name>atlas_v5</name>
+  <version>0.0.0</version>
+  <description>The atlas_v5 package</description>
 
+  <maintainer email="marc@bostondynamics.com">Marc</maintainer>
+
+  <license>bsd</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>xacro</build_depend>
+  <run_depend>xacro</run_depend>
+
+
+  <export>
+
+  </export>
 </package>
