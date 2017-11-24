@@ -13,7 +13,7 @@ group "0.params_and_model_pub" {
     }
 }
 
-group "1.sim" {
+group "1.simulator" {
     cmd "gazebo_laser" {
         exec = "roslaunch anymal_ori sim.launch";
         host = "localhost";
@@ -22,6 +22,9 @@ group "1.sim" {
         exec = "roslaunch anymal_ori sim.launch anymal_setup:=realsense";
         host = "localhost";
     }
+}
+
+group "2.ros2lcm" {
     cmd "ros2lcm" {
         exec = "rosrun anymal_ori ros2lcm_anymal";
         host = "localhost";
@@ -29,11 +32,19 @@ group "1.sim" {
     cmd "state-sync-anymal" {
         exec = "rosrun motion_estimate state-sync-simple-anymal.py";
         host = "localhost";
-    }    
+    }  
+    cmd "lcm2ros_path_follower" {
+        exec = "rosrun  anymal_ori lcm2ros_path_follower.py";
+        host = "localhost";
+    }
+    cmd "lcm2ros_posture" {
+        exec = "rosrun  anymal_ori lcm2ros_posture.py";
+        host = "localhost";
+    }
 }
 
 
-group "2.vis" {
+group "3.vis" {
     cmd "pronto-viewer" {
         exec = "rosrun pronto_viewer pronto_viewer -c anymal/robot.cfg";
         host = "localhost";
@@ -45,7 +56,7 @@ group "2.vis" {
     }
 }
 
-group "3.maps-server" {
+group "4.maps-server" {
     cmd "husky-lidar-passthrough" {
         exec = "husky-lidar-passthrough";
         host = "localhost";
@@ -60,14 +71,18 @@ group "3.maps-server" {
     }
 }
 
-group "4.path-follower" {
+group "5.path-follower" {
     cmd "path-follower" {
         exec = "rosrun  drs_control husky-path-follower";
         host = "localhost";
     }
-    cmd "follower-bridge" {
-        exec = "rosrun  motion_estimate path_follower_lcm2ros.py";
-        host = "localhost";
-    }
 }
 
+script "start_sim" {
+    start group "0.params_and_model_pub";
+    wait ms 500;
+    start cmd "gazebo_laser";
+    start group "2.ros2lcm";
+    start cmd "director";
+    start cmd "path-follower";
+}
