@@ -32,6 +32,7 @@ pronto-lcmtypes
 vo_estimate
 ori_lcmtypes
 maps_server
+drc_lcmtypes
 
 # will exclude for now
 #vicon
