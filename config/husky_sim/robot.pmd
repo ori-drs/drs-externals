@@ -54,8 +54,7 @@ group "2.vis" {
         host = "localhost";
     }
     cmd "rvis" {
-        exec = "rviz -d `rospack find husky_ori_navigation`/rviz/husky.rviz
-";
+        exec = "rviz -d \"rospack find husky_ori_navigation\"/rviz/husky.rviz";
         host = "localhost";
     }
     cmd "director" {
