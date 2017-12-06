@@ -130,7 +130,7 @@ include_directories(
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
 
 ## Declare a C++ library
-add_library(MultiSenseSLPlugin src/MultiSenseSLPlugin.cpp)
+add_library(MultiSenseSLPlugin SHARED src/MultiSenseSLPlugin.cpp)
 target_link_libraries(MultiSenseSLPlugin ${catkin_LIBRARIES})
 
 

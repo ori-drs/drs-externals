@@ -37,13 +37,9 @@
     "base_roll",
     "base_pitch",
     "base_yaw",
-    "ptu_pan",
-    "ptu_tilt",
     "hokuyo_joint"
   ],
   "robotStateJointNames": [
-    "ptu_pan",
-    "ptu_tilt",
     "hokuyo_joint"
   ],
   "fixedPointFile" : "husky_fp.mat",

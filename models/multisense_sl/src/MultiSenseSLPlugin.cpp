@@ -71,7 +71,7 @@ void MultiSenseSL::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   this->world = _parent->GetWorld();
   this->sdf = _sdf;
 
-  ROS_DEBUG("Loading MultiSense ROS node.");
+  ROS_ERROR("Loading MultiSense ROS node.");
 
   this->lastTime = this->world->GetSimTime();
 
@@ -94,17 +94,19 @@ void MultiSenseSL::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 
   // \todo: add ros topic / service to reset imu (imuReferencePose, etc.)
   // mfallon-hacking: this->spindleLink = this->atlasModel->GetLink("atlas::hokuyo_link");
-  this->spindleLink = this->atlasModel->GetLink("mobile_base::hokuyo_link");
+  this->spindleLink = this->atlasModel->GetLink("hokuyo_link");
   if (!this->spindleLink)
   {
+    ROS_ERROR("spindle link not found");
     gzerr << "spindle link not found, plugin will stop loading\n";
     return;
   }
 
   // mfallon-hacking: this->spindleJoint = this->atlasModel->GetJoint("atlas::hokuyo_joint");
-  this->spindleJoint = this->atlasModel->GetJoint("mobile_base::hokuyo_joint");
+  this->spindleJoint = this->atlasModel->GetJoint("hokuyo_joint");
   if (!this->spindleJoint)
   {
+    ROS_ERROR("spindle joint not found");
     gzerr << "spindle joint not found, plugin will stop loading x\n";
     return;
   }
@@ -143,8 +145,10 @@ void MultiSenseSL::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     return;
   }
 
-  this->deferred_load_thread_ = boost::thread(
-    boost::bind(&MultiSenseSL::LoadThread, this));
+  // mfallon, I made this change to patch controller:
+//  this->deferred_load_thread_ = boost::thread(
+//    boost::bind(&MultiSenseSL::LoadThread, this));
+  LoadThread();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -302,6 +306,8 @@ void MultiSenseSL::LoadThread()
 
   this->updateConnection = event::Events::ConnectWorldUpdateBegin(
      boost::bind(&MultiSenseSL::UpdateStates, this));
+
+  ROS_ERROR("MultiSenseSL LoadThread finished successfully");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

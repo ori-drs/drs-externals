@@ -14,19 +14,19 @@ group "0.params_and_model_pub" {
 }
 
 group "1.simulator" {
-    cmd "gazebo_laser" {
-        exec = "roslaunch anymal_ori sim.launch";
+    cmd "sim_sensors" {
+        exec = "roslaunch anymal_ori nav_sim.launch";
         host = "localhost";
     }
-    cmd "gazebo_realsense" {
-        exec = "roslaunch anymal_ori sim.launch anymal_setup:=realsense";
+    cmd "sim_no_sensors" {
+        exec = "roslaunch anymal_ori sim.launch";
         host = "localhost";
     }
 }
 
 group "2.ros2lcm" {
     cmd "ros2lcm" {
-        exec = "rosrun anymal_ori ros2lcm_anymal";
+        exec = "rosrun drs_control ros2lcm_anymal";
         host = "localhost";
     }
     cmd "state-sync-anymal" {
@@ -34,15 +34,15 @@ group "2.ros2lcm" {
         host = "localhost";
     }  
     cmd "lcm2ros_path_follower" {
-        exec = "rosrun  anymal_ori lcm2ros_path_follower.py";
+        exec = "rosrun drs_control lcm2ros_path_follower.py";
         host = "localhost";
     }
     cmd "lcm2ros_posture" {
-        exec = "rosrun  anymal_ori lcm2ros_posture.py";
+        exec = "rosrun drs_control lcm2ros_posture.py";
         host = "localhost";
     }
     cmd "lcm2ros_commands" {
-        exec = "rosrun  anymal_ori lcm2ros_commands.py";
+        exec = "rosrun drs_control lcm2ros_commands.py";
         host = "localhost";
     }
 }
@@ -82,10 +82,19 @@ group "5.path-follower" {
     }
 }
 
-script "start_sim" {
+script "start_sim_sensors" {
     start group "0.params_and_model_pub";
     wait ms 500;
-    start cmd "gazebo_laser";
+    start cmd "sim_sensors";
+    start group "2.ros2lcm";
+    start cmd "director";
+    start cmd "path-follower";
+}
+
+script "start_sim_no_sensors" {
+    start group "0.params_and_model_pub";
+    wait ms 500;
+    start cmd "sim_no_sensors";
     start group "2.ros2lcm";
     start cmd "director";
     start cmd "path-follower";

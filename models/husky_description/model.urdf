@@ -414,9 +414,10 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
       <parent link="base_link" />
       <child link="head_root" />
     </joint> -->
-  <joint name="multisense_to_ptu" type="fixed">
-    <origin xyz="0.075 0.0 0.075"/>
-    <parent link="ptu_mount_link"/>
+  <joint name="head_joint" type="fixed">
+    <origin xyz="0.315 0.0 0.593"/>
+    <parent link="base_link" />
+<!--      <parent link="ptu_mount_link" /> -->
     <child link="head_root"/>
   </joint>
   <!-- Inertia parameters -->
@@ -940,7 +941,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <link name="ptu_mount_link"/>
   <!-- There's an offset between the origin of the pan joint and the origin of 
          the overall device, which is between the mounting screws on its base. -->
-  <joint name="ptu_pan" type="revolute">
+  <joint name="ptu_pan" type="fixed">
     <parent link="ptu_base_link"/>
     <child link="ptu_pan_link"/>
     <origin xyz="0 0 0.092"/>
@@ -949,7 +950,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     <dynamics damping="1.0" friction="10.0"/>
   </joint>
   <!-- The tilt joint -->
-  <joint name="ptu_tilt" type="revolute">
+  <joint name="ptu_tilt" type="fixed">
     <parent link="ptu_pan_link"/>
     <origin xyz="0 0 0.13"/>
     <child link="ptu_tilt_link"/>
