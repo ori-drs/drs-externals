@@ -19,7 +19,7 @@ group "1.gazebo" {
         host = "localhost";
     }
     cmd "gazebo_flat" {
-        exec = "roslaunch husky_ori husky_empty_world_multisense.launch";
+        exec = "roslaunch husky_ori husky_atrium_multisense.launch";
         host = "localhost";
     }
     cmd "lcm2ros" {
