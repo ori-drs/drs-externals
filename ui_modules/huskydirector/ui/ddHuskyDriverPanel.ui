@@ -158,9 +158,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="sendButton">
+             <widget class="QPushButton" name="stopDrivingButton">
               <property name="text">
-               <string>Panic!</string>
+               <string>Stop Driving!</string>
               </property>
              </widget>
             </item>

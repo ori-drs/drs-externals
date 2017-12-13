@@ -48,6 +48,7 @@ class HuskyDriverPanel(object):
         self.ui.backwardCommandButton.connect('pressed()', self.backwardCommandButton)
         self.ui.leftTurnCommandButton.connect('pressed()', self.leftTurnCommandButton)
         self.ui.rightTurnCommandButton.connect('pressed()', self.rightTurnCommandButton)
+        self.ui.stopDrivingButton.connect('pressed()', self.stopDrivingButton)
 
 
         self.ui.resetLinearVelocityButton.connect('pressed()', self.resetLinearVelocityButton)
@@ -101,6 +102,11 @@ class HuskyDriverPanel(object):
         self.sendCommand(0, self.ui.angularVelocitySpinBox.value)
     def rightTurnCommandButton(self):
         self.sendCommand(0, -self.ui.angularVelocitySpinBox.value)
+    def stopDrivingButton(self):
+        msg = lcmdrc.plan_control_t()
+        msg.utime = getUtime()
+        msg.control = lcmdrc.plan_control_t.TERMINATE
+        lcmUtils.publish('STOP_WALKING', msg)
 
     # These reset values are duplicated from the ui file
     def resetLinearVelocityButton(self):
@@ -117,7 +123,7 @@ class HuskyDriverPanel(object):
         command.angular_velocity.x = 0
         command.angular_velocity.y = 0
         command.angular_velocity.z = angularVelocity
-        lcmUtils.publish('HUSKY_CMD', command)
+        lcmUtils.publish('PATH_FOLLOWER_CMD', command)
 
     # Husky PTU Control
     def neckUpCommandButton(self):

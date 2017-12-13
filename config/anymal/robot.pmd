@@ -30,13 +30,9 @@ group "2.ros2lcm" {
         host = "localhost";
     }
     cmd "state-sync-anymal" {
-        exec = "rosrun motion_estimate state-sync-simple-anymal.py";
+        exec = "rosrun drs_control state-sync-simple-anymal.py";
         host = "localhost";
     }  
-    cmd "lcm2ros_path_follower" {
-        exec = "rosrun drs_control lcm2ros_path_follower.py";
-        host = "localhost";
-    }
     cmd "lcm2ros_posture" {
         exec = "rosrun drs_control lcm2ros_posture.py";
         host = "localhost";
