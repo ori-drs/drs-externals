@@ -19,7 +19,7 @@ group "1.simulator" {
         host = "localhost";
     }
     cmd "sim_no_sensors" {
-        exec = "roslaunch anymal_ori sim.launch";
+        exec = "roslaunch anymal_sim sim.launch";
         host = "localhost";
     }
 }
