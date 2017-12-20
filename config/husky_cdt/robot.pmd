@@ -1,0 +1,111 @@
+group "0.params_and_model_pub" {
+    cmd "pserver" {
+        exec = "rosrun bot_param bot-param-server $DRS_BASE/externals/config/husky_cdt/robot.cfg";
+        host = "localhost";
+    }
+    cmd "model" {
+        exec = "rosrun model_client  robot_model_publisher $DRS_BASE/externals/models/husky_description/model.urdf";
+        host = "localhost";
+    }
+    cmd "roscore" {
+        exec = "roscore";
+        host = "localhost";
+    }
+    cmd "add-virtual-interface-for-laser-add-to-boot" {
+        exec = "sudo ifconfig enp0s25:lms 192.168.0.2 netmask 255.255.255.0 up";
+        host = "localhost";
+    }
+}
+
+group "1a.vis" {
+    cmd "pronto-viewer" {
+        exec = "pronto-viewer -c husky/robot.cfg";
+        host = "localhost";
+    }
+    cmd "glview" {
+        exec = "rosrun  multisense_glview multisense_glview";
+        host = "localhost";
+    }
+    cmd "bot-spy" {
+        exec = "bot-spy";
+        host = "localhost";
+    }
+
+    cmd "director" {
+        exec = "director -husky -c $DRS_BASE/externals/config/husky_cdt/robot.cfg --startup $DRS_BASE/externals/ui_modules/huskydirector/runstartup.py";
+        host = "localhost";
+    }
+}
+
+group "2.drivers" {
+    cmd "ros2lcm" {
+        exec = "rosrun drs_control ros2lcm_husky";
+        host = "localhost";
+    }
+    cmd "multisense-3-images" {
+        exec = "multisense-lcm-driver -n hokuyo_joint -o 3";
+        host = "localhost";
+    }
+    cmd "sick" {
+        exec = "roslaunch husky_ori LMS1xx_cdt_husky.launch";
+        host = "localhost";
+    }
+    cmd "realsense" {
+        exec = "roslaunch realsense_camera zr300_nodelet_default.launch";
+        host = "localhost";
+    }
+}
+
+group "3.logging" {
+    cmd "log_ros_realsense_lidar" {
+        exec = "rosbag record /camera/fisheye/image_raw /camera/imu/data_raw /camera/depth/image_raw /tf /tf_static /camera/color/image_raw /camera/depth/image_raw /horizontal_sick/scan";
+        host = "localhost";
+    }
+    cmd "log_lcm" {
+        exec = "lcm-logger";
+        host = "localhost";
+    }
+}
+
+
+
+group "4.processing" {
+    cmd "send-pose" {
+        exec = "rosrun  motion_estimate send-a-pose.py";
+        host = "localhost";
+    }
+    cmd "state-sync" {
+        exec = "rosrun  drs_control state-sync-simple-husky-hack.py";
+        host = "localhost";
+    }
+    cmd "vo" {
+        exec = "rosrun  vo_estimator se-simple-fusion  -m 3";
+        host = "localhost";
+    }
+    cmd "fake-imu" {
+        exec = "rosrun  motion_estimate send-fake-imu.py";
+        host = "localhost";
+    }
+    cmd "log_lcm" {
+        exec = "lcm-logplayer-gui $HOME/logs/husky_cdt/2017-12-20-car-park/lcmlog-2017-12-20.00 -p";
+        host = "localhost";
+    }
+    cmd "data-request" {
+        exec = "rosrun maps_server data-request-server";
+        host = "localhost";
+    }
+    cmd "maps-server" {
+        exec = "rosrun  maps_server maps-server -l MULTISENSE_SCAN";
+        host = "localhost";
+    }
+    cmd "scan-matcher" {
+        exec = "rosrun lidar_odometry rpg-scan-matcher -p -l HORIZONTAL_SCAN  -F \"-2.0,2.0\" -pc POSE_BODY -P husky_cdt/robot.cfg -d -f";
+        host = "localhost";
+    }
+}
+
+script "start_drivers" {
+    start cmd "roscore";
+    wait ms 500;
+    start group "2.drivers";
+}

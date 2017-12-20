@@ -109,7 +109,7 @@ catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES husky_description_rpg
   CATKIN_DEPENDS gazebo_plugins sensor_msgs
-  DEPENDS system_lib
+#  DEPENDS system_lib
 )
 
 find_package(gazebo REQUIRED)
@@ -198,3 +198,5 @@ install(DIRECTORY include/${PROJECT_NAME}/
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+#catkin_python_setup()
